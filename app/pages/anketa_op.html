@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta lang="ru">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Задание 2.2: анкета</title>
+</head>
+
+<body>
+
+<div class="content-wrapper center mw">
+	<header>
+		<div class="header-inner center">
+			<h2 class="hf-headings">Анкета (?:)</h2>
+		</div>
+	</header>
+
+	<main>
+		<div class="main-wrapper center clfx bg-col-1">
+
+			<nav class="is-floated-md">
+				<div class="nav-inner center">
+					<ul>
+						<li><a href="index.html">Тестовое (вёрстка)</a></li>
+						<li><a href="simply.html">Задание 1: простые числа</a></li>
+						<li><a href='anketa_if.html'>Задание 2.1: анкета (if)</a></li>
+						<li><a href="anketa_op.html" class="is-current">Задание 2.2: анкета (?:)</a></li>
+						<li><a href="#">Задание 3: поиск 3 длинных слов</a></li>
+						<li><a href="#">Lorem ipsum.</a></li>
+						<li><a href="#">Lorem ipsum.</a></li>
+						<li><a href="#">Lorem ipsum.</a></li>
+						<li><a href="#">Lorem ipsum.</a></li>
+						<li><a href="#">Lorem ipsum.</a></li>
+					</ul>
+				</div>
+			</nav>
+
+			<article>
+				<div class="article-inner center">
+					<h3>Задание №2.2</h3>
+					<p>
+						Требуется спросить у пользователя:
+						<ul>
+							<li>
+								фамилию, имя, отчество РАЗДЕЛЬНО (оператором prompt)
+							</li>
+							<li>
+								возраст в годах (оператором prompt)
+							</li>
+							<li>
+								пол (оператором confirm, например, "ваш пол - мужской?")
+							</li>
+						</ul>
+					</p>
+
+					<p>
+						и вывести оператором alert анкету пользователя по примеру:
+						<ul>
+							<li>
+								ФИО: Иванов Иван Иванович
+							</li>
+							<li>
+								возраст, лет: 20
+							</li>
+							<li>
+								возраст, дней: 7300
+							</li>
+							<li>
+								пол: мужской
+							</li>
+							<li>
+								пенсионный возраст: нет
+							</li>
+						</ul>
+					</p>
+
+					<p>
+						В обоих реализациях оператор alert должен использоваться ровно один раз.
+						Учесть, что у мужчин и женщин пенсионный возраст различается.
+					</p>
+
+					<p>
+						На странице anketa_oper.html реализовать задание с использованием условной операции (?:), без условного оператора (if).
+					</p>
+
+					<button class='js-data-btn'>Повторить опрос</button>
+
+				</div>
+			</article>
+		</div>
+	</main>
+
+	<footer>
+		<h2 class="hf-headings">Анкета (?:)</h2>
+	</footer>
+
+</div>
+
+<script src="./../scripts/index.js"></script>
+<script src="./../scripts/anketa_op.js"></script>
+</body>
+</html>
