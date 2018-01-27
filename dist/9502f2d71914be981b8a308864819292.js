@@ -1,11 +1,11 @@
 require=function(r,e,n){function t(n,o){function i(r){return t(i.resolve(r))}function f(e){return r[n][1][e]||e}if(!e[n]){if(!r[n]){var c="function"==typeof require&&require;if(!o&&c)return c(n,!0);if(u)return u(n,!0);var l=new Error("Cannot find module '"+n+"'");throw l.code="MODULE_NOT_FOUND",l}i.resolve=f;var a=e[n]=new t.Module;r[n][0].call(a.exports,i,a,a.exports)}return e[n].exports}function o(){this.bundle=t,this.exports={}}var u="function"==typeof require&&require;t.Module=o,t.modules=r,t.cache=e,t.parent=u;for(var i=0;i<n.length;i++)t(n[i]);return t}({8:[function(require,module,exports) {
 
-},{"./../assets/bg-skyscraper.png":14}],5:[function(require,module,exports) {
+},{"./../assets/bg-skyscraper.png":14}],6:[function(require,module,exports) {
 "use strict";require("./../styles/main.css");
 },{"./../styles/main.css":8}],16:[function(require,module,exports) {
 var t=null;function r(){return t||(t=e()),t}function e(){try{throw new Error}catch(r){var t=(""+r.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);if(t)return n(t[0])}return"/"}function n(t){return(""+t).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/,"$1")+"/"}exports.getBundleURL=r,exports.getBaseURL=n;
 },{}],15:[function(require,module,exports) {
 var e=require("./bundle-url").getBundleURL;function r(e){var r=e[e.length-1];try{return Promise.resolve(require(r))}catch(r){if("MODULE_NOT_FOUND"===r.code)return new s(function(r,n){t(e).then(r,n)});throw r}}function t(e){var r=e[e.length-1];return Promise.all(e.slice(0,-1).map(u)).then(function(){return require(r)})}var n={};function o(e,r){n[e]=r}module.exports=exports=r,exports.load=t,exports.register=o;var i={};function u(r){var t;if(Array.isArray(r)&&(t=r[1],r=r[0]),i[r])return i[r];var o=r.match(/\.(.+)$/)[1].toLowerCase(),u=n[o];return u?i[r]=u(e()+r).then(function(e){return e&&(module.bundle.modules[t]=[function(r,t){t.exports=e},{}]),e}):void 0}function s(e){this.executor=e,this.promise=null}s.prototype.then=function(e,r){return this.promise||(this.promise=new Promise(this.executor).then(e,r))},s.prototype.catch=function(e){return this.promise||(this.promise=new Promise(this.executor).catch(e))};
 },{"./bundle-url":16}],0:[function(require,module,exports) {
-var b=require(15);b.load([["b6731838303b30817085ef05b9e34141.png",14],5]);
+var b=require(15);b.load([["b6731838303b30817085ef05b9e34141.png",14],6]);
 },{}]},{},[0])
