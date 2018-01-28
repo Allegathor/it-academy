@@ -116,6 +116,28 @@ article p, article ul {
 	font-size: 18px;
 }
 
+table {
+	border-collapse: collapse;
+}
+
+table, td {
+	border: 1px solid lightblue;
+}
+
+td {
+	width: 36px;
+	height: 36px;
+	text-align: center;
+}
+
+/* tr:nth-child(2n+1) td:nth-child(2n+1) {
+	background-color: #ddd;
+} */
+
+/* tr:nth-child(2n) td:nth-child(2n) {
+	background-color: #fee;
+} */
+
 @media only screen and (min-width: 768px) {
 
 	.main-wrapper {
