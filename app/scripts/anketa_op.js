@@ -39,7 +39,6 @@ var ready = function() {
 			}
 		}
 
-		console.log('fep');
 		return false;
 
 	}
