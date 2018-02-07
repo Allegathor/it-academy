@@ -31,7 +31,8 @@ var ready = function() {
 			if ( type === 'string' && isNaN(toIntAttempt) ) {
 				return true;
 
-			} else if ( type === 'number' && !isNaN(toIntAttempt) ) {
+			} else if ( type === 'number' && !isNaN(toIntAttempt) &&
+			(toIntAttempt > 0 && toIntAttempt < 130) ) {
 				return true;
 
 			} else {
@@ -52,7 +53,7 @@ var ready = function() {
 
 			expType = (!prop.num) ? 'string' : 'number';
 			fail = false;
-			failMsg = (!prop.num) ? ' корректно! (поле не должно быть пустым; используйте кириллицу/латиницу; числовые значения не допускаются)' : ' корректно! (поле не должно быть пустым, а введёное значение должно являться числом)';
+			failMsg = (!prop.num) ? ' корректно! (поле не должно быть пустым; используйте кириллицу/латиницу; числовые значения не допускаются)' : ' корректно! (поле не должно быть пустым, а введёное значение должно являться числом, которое больше 0, но меньше 130)';
 
 			while (!isValid(prop.value, expType)) {
 				prop.value = (!fail) ? prompt(prop.msg, '') :
