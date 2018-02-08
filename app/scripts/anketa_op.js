@@ -27,7 +27,7 @@ var ready = function() {
 
 	var isValid = function(value, type) {
 		var toIntAttempt = parseInt(value, 10);
-		if (value !== '') {
+		if (value !== '' && value !== null) {
 			if ( type === 'string' && isNaN(toIntAttempt) ) {
 				return true;
 
@@ -59,13 +59,11 @@ var ready = function() {
 				prop.value = (!fail) ? prompt(prop.msg, '') :
 				prompt(prop.msg + failMsg, '');
 
-				if (prop.value === null) { return false; }
 				fail = true;
 			}
 
 		} else {
 			prop.value = confirm(prop.msg);
-			if (prop.value === null) { return false; }
 
 		}
 
@@ -83,9 +81,6 @@ var ready = function() {
 
 		for (prop in user) {
 			var res = canShowNext(user[prop]);
-			if (!res) {
-				return;
-			}
 		}
 
 		formatData(user);
