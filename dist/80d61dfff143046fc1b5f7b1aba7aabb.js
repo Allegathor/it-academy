@@ -69,19 +69,16 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({83:[function(require,module,exports) {
+})({13:[function(require,module,exports) {
 var btn = document.getElementById('check-btn');
 var input = document.getElementById('text-area');
 
 var searchPalindrome = function(string) {
 
-  var s = string.toLowerCase().replace(/[\n\u0020\u2013\u2014\-?!'".,ьъё]/g, function(match, pos) {
-    if(match === 'ё') {
-      return 'е';
-    } else {
-      return '';
-    }
-  });
+  var s = string.toLowerCase();
+
+  s = s.replace(/[\n\u0020\u2013\u2014\-?!'".,ьъ]/g, '');
+  s = s.replace(/ё/g, 'е');
 
   var startIndex = 0;
   var stopIndex = s.length - 1;
@@ -116,4 +113,4 @@ var btnHandler = function() {
 
 btn.addEventListener('click', btnHandler);
 
-},{}]},{},[83])
+},{}]},{},[13])

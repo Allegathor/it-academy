@@ -69,13 +69,13 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({94:[function(require,module,exports) {
+})({12:[function(require,module,exports) {
 
-},{"./../assets/bg-skyscraper.png":95}],14:[function(require,module,exports) {
+},{"./../assets/bg-skyscraper.png":19}],7:[function(require,module,exports) {
 'use strict';
 
 require('./../styles/main.css');
-},{"./../styles/main.css":94}],97:[function(require,module,exports) {
+},{"./../styles/main.css":12}],21:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -106,7 +106,7 @@ function getBaseURL(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 
-},{}],96:[function(require,module,exports) {
+},{}],20:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -185,6 +185,6 @@ LazyPromise.prototype.catch = function (onError) {
   return this.promise || (this.promise = new Promise(this.executor).catch(onError));
 };
 
-},{"./bundle-url":97}],0:[function(require,module,exports) {
-var b=require(96);b.load([["b6731838303b30817085ef05b9e34141.png",95],14]);
+},{"./bundle-url":21}],0:[function(require,module,exports) {
+var b=require(20);b.load([["b6731838303b30817085ef05b9e34141.png",19],7]);
 },{}]},{},[0])
