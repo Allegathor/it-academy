@@ -1,3 +1,106 @@
-require=function(r,e,n){function t(n,o){function i(r){return t(i.resolve(r))}function f(e){return r[n][1][e]||e}if(!e[n]){if(!r[n]){var c="function"==typeof require&&require;if(!o&&c)return c(n,!0);if(u)return u(n,!0);var l=new Error("Cannot find module '"+n+"'");throw l.code="MODULE_NOT_FOUND",l}i.resolve=f;var a=e[n]=new t.Module;r[n][0].call(a.exports,i,a,a.exports)}return e[n].exports}function o(){this.bundle=t,this.exports={}}var u="function"==typeof require&&require;t.Module=o,t.modules=r,t.cache=e,t.parent=u;for(var i=0;i<n.length;i++)t(n[i]);return t}({8:[function(require,module,exports) {
-var e=function(e,r){for(var o=0,t=document.querySelector(".js-prime-tbody"),n=1,c=.02,d=e;d<=r;d++){var u=1;do{++u===d&&(o%12||0===o||n++,t.querySelector(".js-row-"+n).insertAdjacentHTML("beforeEnd",'<td style="background-color: rgba(0, 52, 180, '+c+');">'+d+"</td>"),o++,c+=.0045)}while(d%u&&u<d)}document.querySelector(".js-prime-count").innerText="Общее количество простых чисел: "+o};e(1,1e3);
-},{}]},{},[8])
+// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+
+// eslint-disable-next-line no-global-assign
+require = (function (modules, cache, entry) {
+  // Save the require from previous bundle to this closure if any
+  var previousRequire = typeof require === "function" && require;
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire = typeof require === "function" && require;
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        var err = new Error('Cannot find module \'' + name + '\'');
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+      
+      localRequire.resolve = resolve;
+
+      var module = cache[name] = new newRequire.Module;
+
+      modules[name][0].call(module.exports, localRequire, module, module.exports);
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x){
+      return newRequire(localRequire.resolve(x));
+    }
+
+    function resolve(x){
+      return modules[name][1][x] || x;
+    }
+  }
+
+  function Module() {
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  // Override the current require with this new one
+  return newRequire;
+})({87:[function(require,module,exports) {
+var findPrimeNums = function(startIndex, stopIndex) {
+	var count = 0;
+	var tbody = document.querySelector('.js-prime-tbody');
+	var row = 1;
+	var alpha = 0.02;
+
+	for(var i = startIndex; i <= stopIndex; i++) {
+
+		var k = 1;
+
+		do {
+			k++;
+
+			if(k === i) {
+
+				if( !(count % 12) && count !== 0 ) {
+					row++;
+				}
+
+				tbody.querySelector('.js-row-' + row).insertAdjacentHTML('beforeEnd', '<td style="background-color: rgba(0, 52, 180, ' + alpha + ');">' + i + '</td>');
+
+				count++;
+				alpha += 0.0045;
+			}
+
+		} while(i % k && k < i);
+	}
+
+	document.querySelector('.js-prime-count').innerText = 'Общее количество простых чисел: ' + count;
+}
+
+findPrimeNums(1, 1000);
+
+},{}]},{},[87])

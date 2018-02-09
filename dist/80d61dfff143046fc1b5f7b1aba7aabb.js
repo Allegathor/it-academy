@@ -69,49 +69,51 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({88:[function(require,module,exports) {
-var btn = document.querySelector('.js-data-btn');
+})({83:[function(require,module,exports) {
+var btn = document.getElementById('check-btn');
+var input = document.getElementById('text-area');
 
-var findSubStr = function(str, k) {
-	var subStrArr = str.split(' ');
-	var head = 1;
-	var q = [];
-	var res;
+var searchPalindrome = function(string) {
 
-	if (subStrArr.length > k) {
+  var s = string.toLowerCase().replace(/[\n\u0020\u2013\u2014\-?!'".,ьъё]/g, function(match, pos) {
+    if(match === 'ё') {
+      return 'е';
+    } else {
+      return '';
+    }
+  });
 
-		for (var i = 0; i < subStrArr.length; i++) {
+  var startIndex = 0;
+  var stopIndex = s.length - 1;
 
-			if (subStrArr[i].length > head) {
-				q.unshift(subStrArr[i]);
-				head = subStrArr[i].length;
+  var i = startIndex;
+  var j = stopIndex;
 
-				if (q.length > k) {
-					q.pop();
-				}
+  if (s.length > 2) {
 
-			}
+    while(s.charAt(i) === s.charAt(j))  {
+      i++;
+      j--;
 
-		}
+      if (i > j) {
+        return true;
+      }
+    }
 
-		res = q.join(';');
-		alert(res);
+    return false;
 
-	} else {
-		res = subStrArr.join(';');
-		alert(res);
-	}
+  } else if (s.length === 2) {
+    return (s.charAt(i) === s.charAt(j)) ? true : false;
+
+  } else if (s.length === 1) {
+    return true;
+  }
 }
 
-var requestText = function() {
-	var text = prompt('Введите текст', '');
-	if (text === null) { return; }
-
-	findSubStr(text, 3);
+var btnHandler = function() {
+  console.log(searchPalindrome(input.value));
 }
 
-btn.addEventListener('click', function(evt){
-	requestText();
-})
+btn.addEventListener('click', btnHandler);
 
-},{}]},{},[88])
+},{}]},{},[83])

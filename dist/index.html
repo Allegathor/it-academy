@@ -1,1 +1,81 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta lang="ru"> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta http-equiv="X-UA-Compatible" content="ie=edge"> <title>Тестовые задания</title> <link rel="stylesheet" href="/it-academy/9502f2d71914be981b8a308864819292.css"></head> <body> <div class="content-wrapper center mw"> <header> <div class="header-inner center"> <h2 class="hf-headings">Вы не знаете JS: Асинхронность и Производительность</h2> </div> </header> <main> <div class="main-wrapper center clfx bg-col-1"> <nav class="is-floated-md"> <div class="nav-inner center"> <ul> <li><a href="/it-academy/index.html" class="is-current">Тестовое (вёрстка)</a></li> <li><a href="/it-academy/3148b3b5f4e0c723daba6ec9b5ab2730.html">Задание 1: простые числа</a></li> <li><a href="/it-academy/0bf4b85cd27e8745be339bb13d6c6dd2.html">Задание 2.1: анкета (if)</a></li> <li><a href="/it-academy/5159af5ad872dda1629dab8053273c80.html">Задание 2.2: анкета (:?)</a></li> <li><a href="/it-academy/64daf3ef3dcf9d370ca384f051d96cb1.html">Задание 3: поиск 3 длинных слов</a></li> <li><a href="#">Lorem ipsum.</a></li> <li><a href="#">Lorem ipsum.</a></li> <li><a href="#">Lorem ipsum.</a></li> <li><a href="#">Lorem ipsum.</a></li> <li><a href="#">Lorem ipsum.</a></li> </ul> </div> </nav> <article> <div class="article-inner center"> <h3>Асинхронный console()</h3> <img src="/it-academy/9af61352ca0a8de1514dba07899d995f.jpg" alt="console()"> <p> Нет спецификации или требований, описывающих работу console.* методов — они не являются официальной частью JavaScript. Вместо этого они добавлены в JS с помощью среды исполнения. Таким образом, различные браузеры и среды работают с console.* так, как им заблагорассудится, что приводит к запутанным ситуациям. В частности, есть некоторые браузеры и некоторые условия при которых console.log() выведет не то, что ему передали. Основная причина, по которой это может произойти, заключается в том, что операции I/O медленные и блокируют выполнение некоторых программ (не только в JS). Таким образом лучше (с точки зрения UI), чтобы консольные методы работали асинхронно в фоновом режиме. </p> <p> Обычно мы предполагаем, что console.log() выведет, что-то типа {index: 1}, так что в следующей строке, где происходит a.index++, меняется что-то другое, отличное от результата вывода a. </p> <p> В большинстве случаев код выше выполнится в девтулзах, как и предполагается. Но что если выполнить этот же код в ситуации, когда браузеру нужно отложить консольный I/O? В таком случае возможно, что когда объект попадет в консоль, a.index++ уже выполнится, и мы увидим результат {index: 2}. </p> </div> </article> </div> </main> <footer> <h2 class="hf-headings">Вы не знаете JS: Асинхронность и Производительность</h2> </footer> </div> <script src="/it-academy/9502f2d71914be981b8a308864819292.js"></script> </body> </html> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta lang="ru">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Тестовые задания</title>
+<link rel="stylesheet" href="/it-academy/9502f2d71914be981b8a308864819292.css"></head>
+
+<body>
+
+<div class="content-wrapper center mw">
+	<header>
+		<div class="header-inner center">
+			<h2 class="hf-headings">Вы не знаете JS: Асинхронность и Производительность</h2>
+		</div>
+	</header>
+
+	<main>
+		<div class="main-wrapper center clfx bg-col-1">
+
+			<nav class="is-floated-md">
+				<div class="nav-inner center">
+					<ul>
+						<li><a href="/it-academy/index.html" class="is-current">Тестовое (вёрстка)</a></li>
+						<li><a href="/it-academy/3148b3b5f4e0c723daba6ec9b5ab2730.html">Задание 1: простые числа</a></li>
+						<li><a href="/it-academy/0bf4b85cd27e8745be339bb13d6c6dd2.html">Задание 2.1: анкета (if)</a></li>
+						<li><a href="/it-academy/5159af5ad872dda1629dab8053273c80.html">Задание 2.2: анкета (:?)</a></li>
+						<li><a href="/it-academy/64daf3ef3dcf9d370ca384f051d96cb1.html">Задание 3: поиск 3 длинных слов</a></li>
+						<li><a href="/it-academy/c1066f83e329e8aefb9180ee25eabee1.html">Задание A2+: Удалить пробелы</a></li>
+						<li><a href="/it-academy/227d820afa8aac6e6a65696847af0c42.html">Задание A3+: Палиндром</a></li>
+						<li><a href="#">Lorem ipsum.</a></li>
+						<li><a href="#">Lorem ipsum.</a></li>
+						<li><a href="#">Lorem ipsum.</a></li>
+					</ul>
+				</div>
+			</nav>
+
+			<article>
+				<div class="article-inner center">
+					<h3>Асинхронный console()</h3>
+					<img src="/it-academy/9af61352ca0a8de1514dba07899d995f.jpg" alt="console()">
+					<p>
+						Нет спецификации или требований, описывающих работу console.* методов —
+						они не являются официальной частью JavaScript. Вместо этого они
+						добавлены в JS с помощью среды исполнения. Таким образом, различные
+						браузеры и среды работают с console.* так, как им заблагорассудится, что
+						приводит к запутанным ситуациям. В частности, есть некоторые браузеры и
+						некоторые условия при которых console.log() выведет не то, что ему
+						передали. Основная причина, по которой это может произойти, заключается
+						в том, что операции I/O медленные и блокируют выполнение некоторых
+						программ (не только в JS). Таким образом лучше (с точки зрения UI),
+						чтобы консольные методы работали асинхронно в фоновом режиме.
+					</p>
+					<p>
+						Обычно мы предполагаем, что console.log() выведет, что-то типа
+						{index: 1}, так что в следующей строке, где происходит a.index++,
+						меняется что-то другое, отличное от результата вывода a.
+					</p>
+					<p>
+						В большинстве случаев код выше выполнится в девтулзах, как и
+						предполагается. Но что если выполнить этот же код в ситуации, когда
+						браузеру нужно отложить консольный I/O? В таком случае возможно, что
+						когда объект попадет в консоль, a.index++ уже выполнится, и мы
+						увидим результат {index: 2}.
+					</p>
+				</div>
+			</article>
+		</div>
+	</main>
+
+	<footer>
+		<h2 class="hf-headings">Вы не знаете JS: Асинхронность и Производительность</h2>
+	</footer>
+
+</div>
+
+<script src="/it-academy/9502f2d71914be981b8a308864819292.js"></script>
+</body>
+</html>

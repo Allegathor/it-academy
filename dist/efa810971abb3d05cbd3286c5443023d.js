@@ -69,49 +69,32 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({88:[function(require,module,exports) {
-var btn = document.querySelector('.js-data-btn');
+})({84:[function(require,module,exports) {
+var btn = document.getElementById('trim-string');
+var input = document.getElementById('input-string');
 
-var findSubStr = function(str, k) {
-	var subStrArr = str.split(' ');
-	var head = 1;
-	var q = [];
-	var res;
+var trimString = function(string) {
+  var i = 0;
+  var j = string.length - 1;
 
-	if (subStrArr.length > k) {
+  while(string.charAt(i) === '\u0020') {
+    i++;
+  }
 
-		for (var i = 0; i < subStrArr.length; i++) {
+  while(string.charAt(j) === '\u0020') {
+    j--;
+  }
 
-			if (subStrArr[i].length > head) {
-				q.unshift(subStrArr[i]);
-				head = subStrArr[i].length;
-
-				if (q.length > k) {
-					q.pop();
-				}
-
-			}
-
-		}
-
-		res = q.join(';');
-		alert(res);
-
-	} else {
-		res = subStrArr.join(';');
-		alert(res);
-	}
+  string = string.substring(i, j + 1);
+  return string;
 }
 
-var requestText = function() {
-	var text = prompt('Введите текст', '');
-	if (text === null) { return; }
-
-	findSubStr(text, 3);
+var btnHandler = function() {
+  console.log('input: "' + input.value + '"')
+  var trimmed = trimString(input.value);
+  console.log('output: "' + trimmed + '"');
 }
 
-btn.addEventListener('click', function(evt){
-	requestText();
-})
+btn.addEventListener('click', btnHandler);
 
-},{}]},{},[88])
+},{}]},{},[84])
