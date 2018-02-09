@@ -5,7 +5,7 @@ var trimString = function(string) {
   var i = 0;
   var j = string.length - 1;
 
-  while (i < j) {
+  while (i <= j) {
 
     if (string.charAt(i) === '\u0020') {
       i++;
