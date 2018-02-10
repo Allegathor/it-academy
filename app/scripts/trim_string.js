@@ -5,20 +5,12 @@ var trimString = function(string) {
   var i = 0;
   var j = string.length - 1;
 
-  while (i <= j) {
+  while (string.charAt(i) === '\u0020') {
+    i++;
+  }
 
-    if (string.charAt(i) === '\u0020') {
-      i++;
-    }
-
-    if (string.charAt(j) === '\u0020') {
-      j--;
-    }
-
-    if (string.charAt(i) !== '\u0020' && string.charAt(j) !== '\u0020') {
-      break;
-    }
-
+  while (string.charAt(j) === '\u0020' && j >= i) {
+    j--;
   }
 
   string = string.substring(i, j + 1);
