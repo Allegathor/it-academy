@@ -1,4 +1,5 @@
-var testStr = 'Я РАЗМЫШЛЯЛ ПО ДОРОГЕ ДОМОЙ';
+var btn = document.getElementById('count-btn');
+var input = document.getElementById('text-area');
 
 var countVowels = function(string) {
   string = string.toLowerCase();
@@ -8,7 +9,7 @@ var countVowels = function(string) {
     'ё': 0,
     'и': 0,
     'о': 0,
-    'y': 0,
+    'у': 0,
     'э': 0,
     'ю': 0,
     'я': 0,
@@ -22,7 +23,13 @@ var countVowels = function(string) {
      count[char]++;
    }
   }
-  console.log(count);
+
+  return count;
 }
 
-countVowels(testStr);
+
+var btnHandler = function() {
+  console.log(countVowels(input.value));
+}
+
+btn.addEventListener('click', btnHandler);

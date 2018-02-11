@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Задание A2+</title>
+	<title>Задание N.05</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 <div class="content-wrapper center mw">
 	<header>
 		<div class="header-inner center">
-			<h2 class="hf-headings">Удалить начальные и конечные пробелы из строки</h2>
+			<h2 class="hf-headings">Количество гласных в строке</h2>
 		</div>
 	</header>
 
@@ -28,10 +28,10 @@
 						<li><a href='anketa_if.html'>Задание 2.1: анкета (if)</a></li>
 						<li><a href="anketa_op.html">Задание 2.2: анкета (:?)</a></li>
 						<li><a href="words.html">Задание 3: поиск 3 длинных слов</a></li>
-						<li><a href="trim_string.html" class="is-current">Задание A2+: Удалить пробелы</a></li>
+						<li><a href="trim_string.html">Задание A2+: Удалить пробелы</a></li>
 						<li><a href="palindrome.html">Задание A3+: Палиндром</a></li>
 						<li><a href="tree_sum.html">N.05: сумма элементов массива (в т.ч. элементов вложенных массивов)</a></li>
-						<li><a href="vowels.html">N.07: количество гласных в строке</a></li>
+						<li><a href="vowels.html" class="is-current">N.07: количество гласных в строке</a></li>
 						<li><a href="#">Lorem ipsum.</a></li>
 					</ul>
 				</div>
@@ -39,28 +39,28 @@
 
 			<article>
 				<div class="article-inner center">
-					<h3>Задание A2+</h3>
+					<h3>Задание N.07</h3>
 					<p>
-						Написать чистую функцию, эффективно удаляющую из переданной ей
-						строки все начальные и конечные пробелы, не используя метод строки
-						trim.
+						Написать «чистую» функцию для эффективного подсчёта количества русских гласных букв в строке.
+					</p>
+					<p>
+						Спросить у пользователя строку. Вывести в консоль количество русских гласных букв в ней.
 					</p>
 
-					<input id='input-string' type="text">
-					<button id='trim-string'>Убрать пробелы</button>
-
+					<textarea id="text-area" name="name" rows="8" cols="80"></textarea>
+					<button id="count-btn">Произвести подсчёт</button>
 				</div>
 			</article>
 		</div>
 	</main>
 
 	<footer>
-		<h2 class="hf-headings">Удалить начальные и конечные пробелы из строки</h2>
+		<h2 class="hf-headings">Количество гласных в строке</h2>
 	</footer>
 
 </div>
 
 <script src="./../scripts/index.js"></script>
-<script src="./../scripts/trim_string.js"></script>
+<script src="./../scripts/vowels.js"></script>
 </body>
 </html>
