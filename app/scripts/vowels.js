@@ -3,7 +3,7 @@ var input = document.getElementById('text-area');
 
 var countVowels = function(string) {
   string = string.toLowerCase();
-  var count = {
+  var vowels = {
     'а': 0,
     'е': 0,
     'ё': 0,
@@ -17,10 +17,12 @@ var countVowels = function(string) {
   }
 
   var char;
+  var count = 0;
+
   for(var i = 0; i < string.length; i++) {
    char = string[i];
-   if (char in count) {
-     count[char]++;
+   if (char in vowels) {
+     count++;
    }
   }
 
