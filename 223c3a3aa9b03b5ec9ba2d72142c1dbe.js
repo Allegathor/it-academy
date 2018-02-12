@@ -69,13 +69,13 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({124:[function(require,module,exports) {
+})({15:[function(require,module,exports) {
 var btn = document.getElementById('count-btn');
 var input = document.getElementById('text-area');
 
 var countVowels = function(string) {
   string = string.toLowerCase();
-  var count = {
+  var vowels = {
     'а': 0,
     'е': 0,
     'ё': 0,
@@ -89,10 +89,12 @@ var countVowels = function(string) {
   }
 
   var char;
+  var count = 0;
+
   for(var i = 0; i < string.length; i++) {
    char = string[i];
-   if (char in count) {
-     count[char]++;
+   if (char in vowels) {
+     count++;
    }
   }
 
@@ -106,4 +108,4 @@ var btnHandler = function() {
 
 btn.addEventListener('click', btnHandler);
 
-},{}]},{},[124])
+},{}]},{},[15])
