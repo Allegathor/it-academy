@@ -1,33 +1,43 @@
-var m = [ 5, 7,
-        [ 4, [2], 8, [1,3], 2 ],
-        [ 9, [] ],
-        1, 8, []];
+// sum1 = 50, sum2 = 54
+var arr1 = [ 5, 7, [ 4, [2], 8, [1,3], 2 ], [ 9, [] ], 1, 8]
+var arr2 = [[], ['1', '1'], 2, [1, 4, [[2, 1, 3], [4, 2]], 5], [4, 6, [3, 7, 5]], '8', [], [5], [], ['-9', -1], []];
 
-var treeSum = function(arr, curIndex, stopIndex) {
+var treeSum = function(arr) {
+
+  var sum = 0;
+
+  for (var i = 0; i < arr.length; i++) {
+    var el = arr[i];
+    var floatVal = parseFloat(el) || 0;
+
+    if (Array.isArray(el) && (el.length)) {
+      sum += treeSum(el);
+
+    } else if ( (floatVal) !== 0) {
+      sum += floatVal;
+
+    }
+  }
+
+  return sum;
+}
+
+var treeSumRecur = function(arr, curIndex, stopIndex) {
   curIndex = curIndex || 0;
   stopIndex = stopIndex || arr.length - 1;
 
-  var floatVal = parseFloat(arr[curIndex]);
+  var el = arr[curIndex];
+  var floatVal = parseFloat(el) || 0;
 
-  if ( Array.isArray(arr[curIndex]) && (arr[curIndex].length) ) {
-    if (curIndex === stopIndex) {
-      return treeSum(arr[curIndex]);
-    }
-    return treeSum(arr[curIndex]) + treeSum(arr, curIndex + 1);
-
-  } else if ( !isNaN(floatVal) ) {
-    if (curIndex === stopIndex) {
-      return floatVal;
-    }
-    return floatVal + treeSum(arr, curIndex + 1);
-
-  } else {
-    if (curIndex === stopIndex) {
-      return 0;
-    }
-    return treeSum(arr, curIndex + 1);
+  if ( Array.isArray(el) && (el.length) )  {
+    floatVal = treeSumRecur(el);
   }
+
+  return ( curIndex < stopIndex) ?
+  floatVal + treeSumRecur(arr, curIndex + 1) :
+  floatVal; // base case
 
 }
 
-console.log(treeSum(m));
+console.log( 'Loop: \nsum1 =', treeSum(arr1), '\nsum2 =', treeSum(arr2) );
+console.log( 'Recursive: \nsum1 =', treeSumRecur(arr1), '\nsum2 =', treeSumRecur(arr2) );
