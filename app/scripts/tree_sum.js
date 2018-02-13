@@ -8,13 +8,12 @@ var treeSum = function(arr) {
 
   for (var i = 0; i < arr.length; i++) {
     var el = arr[i];
-    var floatVal = parseFloat(el) || 0;
 
     if (Array.isArray(el) && (el.length)) {
       sum += treeSum(el);
 
-    } else if ( (floatVal) !== 0) {
-      sum += floatVal;
+    } else {
+      sum += parseFloat(el) || 0;
 
     }
   }
@@ -22,22 +21,4 @@ var treeSum = function(arr) {
   return sum;
 }
 
-var treeSumRecur = function(arr, curIndex, stopIndex) {
-  curIndex = curIndex || 0;
-  stopIndex = stopIndex || arr.length - 1;
-
-  var el = arr[curIndex];
-  var floatVal = parseFloat(el) || 0;
-
-  if ( Array.isArray(el) && (el.length) )  {
-    floatVal = treeSumRecur(el);
-  }
-
-  return ( curIndex < stopIndex) ?
-  floatVal + treeSumRecur(arr, curIndex + 1) :
-  floatVal; // base case
-
-}
-
 console.log( 'Loop: \nsum1 =', treeSum(arr1), '\nsum2 =', treeSum(arr2) );
-console.log( 'Recursive: \nsum1 =', treeSumRecur(arr1), '\nsum2 =', treeSumRecur(arr2) );
