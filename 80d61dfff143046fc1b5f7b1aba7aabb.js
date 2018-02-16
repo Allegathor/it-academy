@@ -69,26 +69,29 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({14:[function(require,module,exports) {
+})({175:[function(require,module,exports) {
 var btn = document.getElementById('check-btn');
 var input = document.getElementById('text-area');
 
-var searchPalindrome = function(string) {
+var formatString = function(str) {
 
-  var s = string.toLowerCase();
+  var s = str.toLowerCase();
 
   s = s.replace(/[\n\u0020\u2013\u2014\-?!'".,ьъ]/g, '');
   s = s.replace(/ё/g, 'е');
+}
+
+var isPalindrome = function(str) {
 
   var startIndex = 0;
-  var stopIndex = s.length - 1;
+  var stopIndex = str.length - 1;
 
   var i = startIndex;
   var j = stopIndex;
 
-  if (s.length > 2) {
+  if (str.length > 2) {
 
-    while(s.charAt(i) === s.charAt(j))  {
+    while(str.charAt(i) === str.charAt(j))  {
       i++;
       j--;
 
@@ -99,18 +102,39 @@ var searchPalindrome = function(string) {
 
     return false;
 
-  } else if (s.length === 2) {
-    return (s.charAt(i) === s.charAt(j)) ? true : false;
+  } else if (str.length === 2) {
+    return (str.charAt(i) === str.charAt(j)) ? true : false;
 
-  } else if (s.length === 1) {
+  } else if (str.length === 1) {
     return true;
   }
 }
 
+
+var isPalindromeRecur = function(str, i, j) {
+  i = i || 0;
+  j = j || str.length - 1;
+
+  if (i < j) {
+    if (str.charAt(i) === str.charAt(j)) {
+      return isPalindromeRecur(str, i + 1, j - 1);
+
+    } else {
+      return false;
+
+    }
+  }
+
+  return true;
+
+}
+
+
 var btnHandler = function() {
-  console.log(searchPalindrome(input.value));
+  console.log(isPalindrome(input.value));
+  console.log(isPalindromeRecur(input.value));
 }
 
 btn.addEventListener('click', btnHandler);
 
-},{}]},{},[14])
+},{}]},{},[175])
