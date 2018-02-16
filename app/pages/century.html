@@ -13,7 +13,7 @@
 <div class="content-wrapper center mw">
 	<header>
 		<div class="header-inner center">
-			<h2 class="hf-headings">Вернуть сумму всех числовых элементов со всех уровней вложенности массива</h2>
+			<h2 class="hf-headings">Определить век</h2>
 		</div>
 	</header>
 
@@ -29,10 +29,10 @@
 						<li><a href="anketa_op.html">Задание 2.2: анкета (:?)</a></li>
 						<li><a href="words.html">Задание 3: поиск 3 длинных слов</a></li>
 						<li><a href="trim_string.html">Задание A2+: Удалить пробелы</a></li>
-						<li><a href="palindrome.html">Задание A3+, A4+: Палиндром</a></li>
-						<li><a href="tree_sum.html"  class="is-current">N.05: сумма элементов массива (в т.ч. элементов вложенных массивов)</a></li>
+						<li><a href="palindrome.html">Задание A3+: Палиндром</a></li>
+						<li><a href="tree_sum.html">N.05: сумма элементов массива (в т.ч. элементов вложенных массивов)</a></li>
 						<li><a href="vowels.html">N.07: количество гласных в строке</a></li>
-						<li><a href="century.html">B1+: Век</a></li>
+						<li><a href="century.html" class="is-current">B1+: Век</a></li>
 						<li><a href="calc.html">B3+: Функция-калькулятор</a></li>
 					</ul>
 				</div>
@@ -40,26 +40,29 @@
 
 			<article>
 				<div class="article-inner center">
-					<h3>Задание N.05</h3>
+					<h3>Задание B1+</h3>
 					<p>
-						Разработать «чистую» функцию treeSum, которая получает массив, элементы которого могут быть числами или снова массивами, и так до любого уровня.
+						Разработать чистую функцию, получающую год, и возвращающую век, к
+						которому относится данный год.  (Например, 1980 год — 20 век, 2000
+						год — 20 век, 2001 год — 21 век.)  Функция не должна использовать if
+						либо условную операцию, только оператор return. Спросить у
+						пользователя год. Отобразить пользователю соответствующий году век.
 					</p>
-					<p>
-						Функция должна рассчитать и вернуть сумму всех числовых элементов массива со всех уровней.
-					</p>
-
+					<input type="number" id="year-input">
+					<br></br>
+					<div id="century"></div>
 				</div>
 			</article>
 		</div>
 	</main>
 
 	<footer>
-		<h2 class="hf-headings">Вернуть сумму всех числовых элементов со всех уровней вложенности массива</h2>
+		<h2 class="hf-headings">Определить век</h2>
 	</footer>
 
 </div>
 
 <script src="./../scripts/index.js"></script>
-<script src="./../scripts/tree_sum.js"></script>
+<script src="./../scripts/century.js"></script>
 </body>
 </html>

@@ -1,22 +1,25 @@
 var btn = document.getElementById('check-btn');
 var input = document.getElementById('text-area');
 
-var isPalindrome = function(string) {
+var formatString = function(str) {
 
-  var s = string.toLowerCase();
+  var s = str.toLowerCase();
 
   s = s.replace(/[\n\u0020\u2013\u2014\-?!'".,ьъ]/g, '');
   s = s.replace(/ё/g, 'е');
+}
+
+var isPalindrome = function(str) {
 
   var startIndex = 0;
-  var stopIndex = s.length - 1;
+  var stopIndex = str.length - 1;
 
   var i = startIndex;
   var j = stopIndex;
 
-  if (s.length > 2) {
+  if (str.length > 2) {
 
-    while(s.charAt(i) === s.charAt(j))  {
+    while(str.charAt(i) === str.charAt(j))  {
       i++;
       j--;
 
@@ -27,41 +30,30 @@ var isPalindrome = function(string) {
 
     return false;
 
-  } else if (s.length === 2) {
-    return (s.charAt(i) === s.charAt(j)) ? true : false;
+  } else if (str.length === 2) {
+    return (str.charAt(i) === str.charAt(j)) ? true : false;
 
-  } else if (s.length === 1) {
+  } else if (str.length === 1) {
     return true;
   }
 }
 
 
-var isPalindromeRecur = function(string) {
+var isPalindromeRecur = function(str, i, j) {
+  i = i || 0;
+  j = j || str.length - 1;
 
-  var s = string.toLowerCase();
-  var ch1;
-  var ch2;
+  if (i < j) {
+    if (str.charAt(i) === str.charAt(j)) {
+      return isPalindromeRecur(str, i + 1, j - 1);
 
-  s = s.replace(/[\n\u0020\u2013\u2014\-?!'".,ьъ]/g, '');
-  s = s.replace(/ё/g, 'е');
+    } else {
+      return false;
 
-  return (function isEqual(i, j) {
-    i = i || 0;
-    j = j || s.length - 1;
-
-    ch1 = s[i];
-    ch2 = s[j];
-
-    if (i < j) {
-      if (ch1 === ch2) {
-        return isEqual(i + 1, j - 1);
-      } else {
-        return false;
-      }
     }
+  }
 
-    return true;
-  })();
+  return true;
 
 }
 
