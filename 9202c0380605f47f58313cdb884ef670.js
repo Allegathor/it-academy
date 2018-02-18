@@ -69,31 +69,31 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({16:[function(require,module,exports) {
-// sum1 = 50, sum2 = 54
-var arr1 = [ 5, 7, [ 4, [2], 8, [1,3], 2 ], [ 9, [] ], 1, 8]
-var arr2 = [[], ['1', '1'], 2, [1, 4, [[2, 1, 3], [4, 2]], 5], [4, 6, [3, 7, 5]], '8', [], [5], [], ['-9', -1], []];
-
-var treeSum = function(arr) {
-
-  var sum = 0;
-
-  for (var i = 0; i < arr.length; i++) {
-    var el = arr[i];
-
-    if (Array.isArray(el) && (el.length)) {
-      sum += treeSum(el);
-
-    } else {
-      sum += parseFloat(el) || 0;
-
-    }
-  }
-
-  return sum;
+})({33:[function(require,module,exports) {
+function selectNumFrom(n, m) {
+  return Math.floor(Math.random() * (m - n + 1)) + n;
 }
 
-console.log( 'Loop: \nsum1 =', treeSum(arr1), '\nsum2 =', treeSum(arr2) );
+function showRandomColors(colorsCount) {
+  colorsCount = (colorsCount <= 7) ? colorsCount : 3;
+  var colors = [ '', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый'];
+  var used = {};
+
+  for(var i = 1; i <= colorsCount; i++) {
+
+    var n = selectNumFrom(1, 7);
+    var color = colors[n];
+
+    while (color in used) {
+      n = selectNumFrom(1, 7);
+      color = colors[n];
+    }
+    used[color] = true;
+		console.log(color);
+  }
+}
+
+showRandomColors(5);
 
 },{}],29:[function(require,module,exports) {
 
@@ -216,5 +216,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[29,16])
-//# sourceMappingURL=/dist/74e12010a24d512a4c21482c9fbc6663.map
+},{}]},{},[29,33])
+//# sourceMappingURL=/dist/9202c0380605f47f58313cdb884ef670.map
