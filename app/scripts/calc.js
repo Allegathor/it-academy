@@ -4,7 +4,7 @@ var output = document.getElementById('exp-result');
 var getTokens = function(str) {
 	var arr;
 	var s = str.replace(/[^|.+-/*()0-9.]/g, '');
-	s = s.replace(/\d+[.]?\d?|[+-/*()]/g, '$&|');
+	s = s.replace(/(?:(?<=[-+/*^]|^)[-+])?\d+(?:[.]\d+)?|(?:(?<=[\d])[+-]|[*/()])/g, '$&|');
 
 	arr = s.split('|');
 	arr.pop();
