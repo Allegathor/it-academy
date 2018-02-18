@@ -16,7 +16,8 @@ function showRandomColors(colorsCount) {
       n = selectNumFrom(1, 7);
       color = colors[n];
     }
-    used[color] = true;
+
+		used[color] = true;
 		console.log(color);
   }
 }
