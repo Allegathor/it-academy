@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Задание N.05</title>
+	<title>Задание B2+</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 <div class="content-wrapper center mw">
 	<header>
 		<div class="header-inner center">
-			<h2 class="hf-headings">Функция-калькулятор</h2>
+			<h2 class="hf-headings">Перевернуть строку</h2>
 		</div>
 	</header>
 
@@ -34,8 +34,8 @@
 						<li><a href="vowels.html">N.07: количество гласных в строке</a></li>
 						<li><a href="colors.html">N.10: случайные цвета</a></li>
 						<li><a href="century.html">B1+: Век</a></li>
-						<li><a href="reverse_string.html">B2+: Перевернуть строку</a></li>
-						<li><a href="calc.html" class="is-current">B3+: Функция-калькулятор</a></li>
+						<li><a href="reverse_string.html" class="is-current">B2+: Перевернуть строку</a></li>
+						<li><a href="calc.html">B3+: Функция-калькулятор</a></li>
 						<li><a href="#">B4+: Цепочка слов</a></li>
 						<li><a href="build_wrapper.html">B5+: Функция для оборачиваня в тег</a></li>
 					</ul>
@@ -44,27 +44,24 @@
 
 			<article>
 				<div class="article-inner center">
-					<h3>Задание B3+</h3>
+					<h3>Задание B2+</h3>
 					<p>
-						Написать функцию-калькулятор вручную введённого выражения (без использования функции eval и динамического описания функции new Function, если вы знаете о них).
-						Должны работать операции + - * / и скобки, числа должны приниматься целые, дробные (через точку), отрицательные
-						Например, вызываем функцию, передавая ей строку "2*(3+1)", функция возвращает 8.
+						Написать чистую функцию, эффективно переворачивающую строку задом
+						наперёд. Реализация функции не должна использовать циклов и
+						рекурсии.
 					</p>
-					<input type="text" id="exp-input">
-					<br></br>
-					<div id="exp-result"></div>
 				</div>
 			</article>
 		</div>
 	</main>
 
 	<footer>
-		<h2 class="hf-headings">Функция-калькулятор</h2>
+		<h2 class="hf-headings">Перевернуть строку</h2>
 	</footer>
 
 </div>
 
 <script src="./../scripts/index.js"></script>
-<script src="./../scripts/calc.js"></script>
+<script src="./../scripts/reverse_string.js"></script>
 </body>
 </html>

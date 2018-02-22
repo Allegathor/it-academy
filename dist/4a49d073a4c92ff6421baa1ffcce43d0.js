@@ -69,93 +69,44 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({257:[function(require,module,exports) {
-var input = document.getElementById('exp-input');
-var output = document.getElementById('exp-result');
-
-var getTokens = function(str) {
-	var arr;
-	var s = str.replace(/[^|.+-/*()0-9.]/g, '');
-	s = s.replace(/(?:(?<=[-+/*^]|^)[-+])?\d+(?:[.]\d+)?|(?:(?<=[\d])[+-]|[*/()])/g, '$&|');
-
-	arr = s.split('|');
-	arr.pop();
-	return arr;
+})({267:[function(require,module,exports) {
+function htmlEscape(text) {
+	return text.replace(/[<>&"']/gi, function(match) {
+		switch(match) {
+			case('<'):
+				return '&lt;';
+				break;
+			case('>'):
+				return '&gt;';
+				break;
+			case('&'):
+				return '&amp;';
+				break;
+			case("'"):
+				return '&apos;';
+				break;
+			case('"'):
+				return '&quot;';
+				break;
+		}
+	})
 }
 
-var calc = function(tokens) {
-	var operators = {
-		'+': function(a, b){ return a + b },
+function buildWrapper(tag) {
 
-		'-': function(a, b){ return a - b},
+	return function(innerText) {
+		var escapedText = htmlEscape(innerText);
 
-		'*': function(a, b){ return a * b },
-
-		'/': function(a, b){ return a / b}
-	};
-
-	var tsStack = [];
-	var oq = [];
-	var t;
-
-	for (var i = 0; i < tokens.length; i++) {
-		t = tokens[i];
-
-		if (!isNaN(t)) {
-			oq.push(parseFloat(t));
-
-		} else if (t in operators) {
-
-			while((t === '+' || t === '-') && (tsStack[tsStack.length - 1] === '/' || tsStack[tsStack.length - 1] === '*') ) {
-				oq.push(tsStack.pop());
-
-			}
-
-			tsStack.push(t);
-
-		} else if (t === '(') {
-			tsStack.push(t);
-
-		} else if (t === ')') {
-			while(tsStack[tsStack.length - 1] !== '(') {
-				oq.push(tsStack.pop());
-			}
-
-			tsStack.pop();
-		}
+		return '<' + tag + '>' + escapedText + '</' + tag + '>';
 	}
 
-	while(tsStack.length) {
-		oq.push(tsStack.pop());
-	}
-
-	var stack = [];
-	var el;
-	var opd1;
-	var opd2;
-	var val;
-
-	for(var n = 0; n < oq.length; n++) {
-		el = oq[n];
-
-		if(!isNaN(el)) {
-			stack.push(el);
-
-		} else if (el in operators) {
-			opd1 = stack.pop();
-			opd2 = stack.pop();
-
-			val = operators[el](opd2, opd1);
-			stack.push(val);
-		}
-	}
-
-	return stack[0];
 }
 
+var testStr = `In JS 'a' > 10 returns false, but "a" > "10" returns true`;
+var wrapH2 = buildWrapper('H2');
+var wrapP = buildWrapper('P');
 
-input.addEventListener('change', function(evt) {
-	output.textContent = calc(getTokens(input.value));
-})
+console.log(wrapH2(testStr));
+console.log(wrapP(testStr));
 
-},{}]},{},[257])
+},{}]},{},[267])
