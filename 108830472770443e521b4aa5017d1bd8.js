@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({207:[function(require,module,exports) {
+})({263:[function(require,module,exports) {
 var btn = document.querySelector('.js-data-btn');
 
 var findSubStr = function(str, k) {
@@ -114,4 +114,4 @@ btn.addEventListener('click', function(evt){
 	requestText();
 })
 
-},{}]},{},[207])
+},{}]},{},[263])
