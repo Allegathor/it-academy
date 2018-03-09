@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({258:[function(require,module,exports) {
+})({290:[function(require,module,exports) {
 var findPrimeNums = function(startIndex, stopIndex) {
 	var count = 0;
 	var tbody = document.querySelector('.js-prime-tbody');
@@ -103,4 +103,4 @@ var findPrimeNums = function(startIndex, stopIndex) {
 
 findPrimeNums(1, 1000);
 
-},{}]},{},[258])
+},{}]},{},[290])
