@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({260:[function(require,module,exports) {
+})({289:[function(require,module,exports) {
 var ready = function() {
 	var btn = document.querySelector('.js-data-btn');
 
@@ -168,4 +168,4 @@ var ready = function() {
 
 window.addEventListener('load', ready)
 
-},{}]},{},[260])
+},{}]},{},[289])
