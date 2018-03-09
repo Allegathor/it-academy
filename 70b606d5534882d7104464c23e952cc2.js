@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({299:[function(require,module,exports) {
+})({50:[function(require,module,exports) {
 /* Graph type */
 
 var Graph = function() {
@@ -264,4 +264,4 @@ var buildLadder = function(dict, start, end) {
 console.log(buildLadder(t1, 'муха', 'слон'));
 console.log(buildLadder(t1, 'лиса', 'лось'));
 
-},{}]},{},[299])
+},{}]},{},[50])

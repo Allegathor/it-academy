@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({291:[function(require,module,exports) {
+})({21:[function(require,module,exports) {
 var input = document.getElementById('exp-input');
 var output = document.getElementById('exp-result');
 
@@ -158,4 +158,4 @@ input.addEventListener('change', function(evt) {
 	output.textContent = calc(getTokens(input.value));
 })
 
-},{}]},{},[291])
+},{}]},{},[21])
