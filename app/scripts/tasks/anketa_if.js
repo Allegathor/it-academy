@@ -1,6 +1,4 @@
 var btn = document.querySelector('.js-data-btn');
-
-
 var formatData = function(userData) {
 	var formatted = {};
 
