@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,34 +71,34 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({50:[function(require,module,exports) {
+})({323:[function(require,module,exports) {
 /* Graph type */
 
-var Graph = function() {
+var Graph = function Graph() {
 	this.vertices = {};
-}
+};
 
-var GraphNode = function(val) {
+var GraphNode = function GraphNode(val) {
 	this.val = val;
 	this.edges = {};
-}
+};
 
-Graph.prototype.addVertex = function(val) {
-	if(!this.vertices[val]) {
+Graph.prototype.addVertex = function (val) {
+	if (!this.vertices[val]) {
 		this.vertices[val] = new GraphNode(val);
 	}
-}
+};
 
-Graph.prototype.addVertices = function(values) {
-	for(var i = 0; i < values.length; i++) {
-		if(!this.vertices[values[i]]) {
+Graph.prototype.addVertices = function (values) {
+	for (var i = 0; i < values.length; i++) {
+		if (!this.vertices[values[i]]) {
 			this.vertices[values[i]] = new GraphNode(values[i]);
 		}
 	}
-}
+};
 
-Graph.prototype.removeVertex = function(val) {
-	if(this.vertices[val]) {
+Graph.prototype.removeVertex = function (val) {
+	if (this.vertices[val]) {
 		delete this.vertices[val];
 
 		for (key in this.vertices) {
@@ -104,47 +106,45 @@ Graph.prototype.removeVertex = function(val) {
 				delete this.vertices[key].edges[val];
 			}
 		}
-
 	}
-}
+};
 
-Graph.prototype.getVertex = function(val) {
+Graph.prototype.getVertex = function (val) {
 	return this.vertices[val];
-}
+};
 
-Graph.prototype.addEdge = function(start, end) {
-	if(this.vertices[start] && this.vertices[end]) {
+Graph.prototype.addEdge = function (start, end) {
+	if (this.vertices[start] && this.vertices[end]) {
 		this.vertices[start].edges[end] = true;
 		this.vertices[end].edges[start] = true;
 	}
-}
+};
 
-Graph.prototype.removeEdge = function(start, end) {
-	if(this.vertices[start] && this.vertices[end]) {
+Graph.prototype.removeEdge = function (start, end) {
+	if (this.vertices[start] && this.vertices[end]) {
 
-		if(this.vertices[start].edges[end]) {
+		if (this.vertices[start].edges[end]) {
 			delete this.vertices[start].edges[end];
 		}
-
 	}
-}
+};
 
-Graph.prototype.getEdge = function(start, end) {
+Graph.prototype.getEdge = function (start, end) {
 	return this.vertices[start].edges[end] || null;
-}
+};
 
-Graph.prototype.getNeighbors = function(val) {
+Graph.prototype.getNeighbors = function (val) {
 	return this.vertices[val] ? this.vertices[val].edges : null;
-}
+};
 
-var t1 = ['ТАРА','ЛИПА','ТУРА','ЛУЖА','ПАРК','ЛОЖЬ','ЛУПА','ПЛОТ','МУРА','ПАУК','ПАУТ','ПЛУТ','ЛОЖА','СЛОТ','ПАРА','МУХА','СЛОН','ЛИСА','ЛОСЬ'];
+var t1 = ['ТАРА', 'ЛИПА', 'ТУРА', 'ЛУЖА', 'ПАРК', 'ЛОЖЬ', 'ЛУПА', 'ПЛОТ', 'МУРА', 'ПАУК', 'ПАУТ', 'ПЛУТ', 'ЛОЖА', 'СЛОТ', 'ПАРА', 'МУХА', 'СЛОН', 'ЛИСА', 'ЛОСЬ'];
 
 /**
  * Builds a graph based on an array of words
  * @param  {String[]} words Function must accept an array of strings for further work
  * @return {Object}      Return an undirected graph
  */
-var buildGraph = function(words) {
+var buildGraph = function buildGraph(words) {
 	var dict = {};
 	var wordsGraph = new Graph();
 	wordsGraph.addVertices(words);
@@ -152,34 +152,31 @@ var buildGraph = function(words) {
 	var word;
 	var bucket;
 
-	for(var i = 0; i < words.length; i++) {
+	for (var i = 0; i < words.length; i++) {
 		var word = words[i];
 
-		for(var n = 0; n < word.length; n++) {
+		for (var n = 0; n < word.length; n++) {
 			var chars = word.split('');
 			chars.splice(n, 1, '_');
 			var bucket = chars.join('');
 
-			if(bucket in dict) {
+			if (bucket in dict) {
 				dict[bucket].push(word);
 			} else {
 				dict[bucket] = [word];
 			}
 		}
-
 	}
 
-	for(var b in dict) {
-		for(var i = 0; i < b.length - 1; i++) {
-			if(b.length > 1) {
+	for (var b in dict) {
+		for (var i = 0; i < b.length - 1; i++) {
+			if (b.length > 1) {
 				var word1 = dict[b][i];
 
-				for(var j = i + 1; j < b.length; j++) {
-				var word2 = dict[b][j];
-					if(word1 !== word2)
-						wordsGraph.addEdge(word1, word2);
+				for (var j = i + 1; j < b.length; j++) {
+					var word2 = dict[b][j];
+					if (word1 !== word2) wordsGraph.addEdge(word1, word2);
 				}
-
 			} else {
 				break;
 			}
@@ -187,7 +184,7 @@ var buildGraph = function(words) {
 	}
 
 	return wordsGraph;
-}
+};
 
 /**
  * Creates a bfsTree-like object
@@ -197,18 +194,18 @@ var buildGraph = function(words) {
  *
  * @return {Object} Object that contains nodes and their predecessors
  */
-var bfsTree = function(g, start) {
+var bfsTree = function bfsTree(g, start) {
 	var preds = {}; // Key
 	var visited = {};
 	preds[start] = null;
 	var verticesQueue = [];
 	verticesQueue.push(start);
 
-	while(verticesQueue.length > 0) {
+	while (verticesQueue.length > 0) {
 		var currentVert = verticesQueue.shift();
 
-		for(var nbr in g.getNeighbors(currentVert)) {
-			if( !visited[nbr] ) {
+		for (var nbr in g.getNeighbors(currentVert)) {
+			if (!visited[nbr]) {
 				preds[nbr] = currentVert;
 				verticesQueue.push(nbr);
 				visited[nbr] = 'f'; // would be visited in future
@@ -218,18 +215,17 @@ var bfsTree = function(g, start) {
 		visited[currentVert] = 'v'; // visited
 	}
 	return preds;
-}
+};
 
-var normalizeWords = function(words) {
+var normalizeWords = function normalizeWords(words) {
 	var wordUp;
-	var normalized = words.map(function(word, i) {
+	var normalized = words.map(function (word, i) {
 		wordUp = word.toLowerCase();
 		return wordUp;
 	});
 
 	return normalized;
-}
-
+};
 
 /**
  * Creates a word ladder
@@ -240,7 +236,7 @@ var normalizeWords = function(words) {
  *
  * @return {String} Ladder is the shortest path from the start to the end of the tree
  */
-var buildLadder = function(dict, start, end) {
+var buildLadder = function buildLadder(dict, start, end) {
 	var words = normalizeWords(dict);
 	var graph = buildGraph(words);
 	var searchTree = bfsTree(graph, start);
@@ -249,19 +245,17 @@ var buildLadder = function(dict, start, end) {
 
 	do {
 
-		if(word === start){
+		if (word === start) {
 			words.unshift(word);
 			break;
 		}
 		words.unshift(word);
 		word = searchTree[word];
-
-	} while(word !== null)
+	} while (word !== null);
 
 	return words.join('-');
-}
+};
 
 console.log(buildLadder(t1, 'муха', 'слон'));
 console.log(buildLadder(t1, 'лиса', 'лось'));
-
-},{}]},{},[50])
+},{}]},{},[323])

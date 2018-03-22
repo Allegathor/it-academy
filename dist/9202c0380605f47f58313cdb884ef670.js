@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,17 +71,17 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({28:[function(require,module,exports) {
+})({318:[function(require,module,exports) {
 function selectNumFrom(n, m) {
 	return Math.floor(Math.random() * (m - n + 1)) + n;
 }
 
 function showRandomColors(colorsCount) {
-	colorsCount = (colorsCount <= 7) ? colorsCount : 3;
-	var colors = [ '', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый'];
+	colorsCount = colorsCount <= 7 ? colorsCount : 3;
+	var colors = ['', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый'];
 	var used = {};
 
-	for(var i = 1; i <= colorsCount; i++) {
+	for (var i = 1; i <= colorsCount; i++) {
 
 		var n = selectNumFrom(1, 7);
 		var color = colors[n];
@@ -95,5 +97,4 @@ function showRandomColors(colorsCount) {
 }
 
 showRandomColors(5);
-
-},{}]},{},[28])
+},{}]},{},[318])

@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,19 +71,19 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({20:[function(require,module,exports) {
+})({311:[function(require,module,exports) {
 var btn = document.getElementById('check-btn');
 var input = document.getElementById('text-area');
 
-var formatString = function(str) {
+var formatString = function formatString(str) {
 
   var s = str.toLowerCase();
 
   s = s.replace(/[\n\u0020\u2013\u2014\-?!'".,ьъ]/g, '');
   s = s.replace(/ё/g, 'е');
-}
+};
 
-var isPalindrome = function(str) {
+var isPalindrome = function isPalindrome(str) {
 
   var startIndex = 0;
   var stopIndex = str.length - 1;
@@ -91,7 +93,7 @@ var isPalindrome = function(str) {
 
   if (str.length > 2) {
 
-    while(str.charAt(i) === str.charAt(j))  {
+    while (str.charAt(i) === str.charAt(j)) {
       i++;
       j--;
 
@@ -101,40 +103,32 @@ var isPalindrome = function(str) {
     }
 
     return false;
-
   } else if (str.length === 2) {
-    return (str.charAt(i) === str.charAt(j)) ? true : false;
-
+    return str.charAt(i) === str.charAt(j) ? true : false;
   } else if (str.length === 1) {
     return true;
   }
-}
+};
 
-
-var isPalindromeRecur = function(str, i, j) {
+var isPalindromeRecur = function isPalindromeRecur(str, i, j) {
   i = i || 0;
   j = j || str.length - 1;
 
   if (i < j) {
     if (str.charAt(i) === str.charAt(j)) {
       return isPalindromeRecur(str, i + 1, j - 1);
-
     } else {
       return false;
-
     }
   }
 
   return true;
+};
 
-}
-
-
-var btnHandler = function() {
+var btnHandler = function btnHandler() {
   console.log(isPalindrome(input.value));
   console.log(isPalindromeRecur(input.value));
-}
+};
 
 btn.addEventListener('click', btnHandler);
-
-},{}]},{},[20])
+},{}]},{},[311])

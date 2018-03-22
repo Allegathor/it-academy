@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,30 +71,27 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({22:[function(require,module,exports) {
+})({317:[function(require,module,exports) {
 // sum1 = 50, sum2 = 54
-var arr1 = [ 5, 7, [ 4, [2], 8, [1,3], 2 ], [ 9, [] ], 1, 8]
+var arr1 = [5, 7, [4, [2], 8, [1, 3], 2], [9, []], 1, 8];
 var arr2 = [[], ['1', '1'], 2, [1, 4, [[2, 1, 3], [4, 2]], 5], [4, 6, [3, 7, 5]], '8', [], [5], [], ['-9', -1], []];
 
-var treeSum = function(arr) {
+var treeSum = function treeSum(arr) {
 
   var sum = 0;
 
   for (var i = 0; i < arr.length; i++) {
     var el = arr[i];
 
-    if (Array.isArray(el) && (el.length)) {
+    if (Array.isArray(el) && el.length) {
       sum += treeSum(el);
-
     } else {
       sum += parseFloat(el) || 0;
-
     }
   }
 
   return sum;
-}
+};
 
-console.log( 'Loop: \nsum1 =', treeSum(arr1), '\nsum2 =', treeSum(arr2) );
-
-},{}]},{},[22])
+console.log('Loop: \nsum1 =', treeSum(arr1), '\nsum2 =', treeSum(arr2));
+},{}]},{},[317])

@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,11 +71,11 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({21:[function(require,module,exports) {
+})({313:[function(require,module,exports) {
 var input = document.getElementById('exp-input');
 var output = document.getElementById('exp-result');
 
-var getTokens = function(str) {
+var getTokens = function getTokens(str) {
 	var arr;
 	var s = str.replace(/[^|.+-/*()0-9.]/g, '');
 	s = s.replace(/(?:(?<=[-+/*^]|^)[-+])?\d+(?:[.]\d+)?|(?:(?<=[\d])[+-]|[*/()])/g, '$&|');
@@ -81,17 +83,25 @@ var getTokens = function(str) {
 	arr = s.split('|');
 	arr.pop();
 	return arr;
-}
+};
 
-var calc = function(tokens) {
+var calc = function calc(tokens) {
 	var operators = {
-		'+': function(a, b){ return a + b },
+		'+': function _(a, b) {
+			return a + b;
+		},
 
-		'-': function(a, b){ return a - b},
+		'-': function _(a, b) {
+			return a - b;
+		},
 
-		'*': function(a, b){ return a * b },
+		'*': function _(a, b) {
+			return a * b;
+		},
 
-		'/': function(a, b){ return a / b}
+		'/': function _(a, b) {
+			return a / b;
+		}
 	};
 
 	var tsStack = [];
@@ -103,21 +113,17 @@ var calc = function(tokens) {
 
 		if (!isNaN(t)) {
 			oq.push(parseFloat(t));
-
 		} else if (t in operators) {
 
-			while((t === '+' || t === '-') && (tsStack[tsStack.length - 1] === '/' || tsStack[tsStack.length - 1] === '*') ) {
+			while ((t === '+' || t === '-') && (tsStack[tsStack.length - 1] === '/' || tsStack[tsStack.length - 1] === '*')) {
 				oq.push(tsStack.pop());
-
 			}
 
 			tsStack.push(t);
-
 		} else if (t === '(') {
 			tsStack.push(t);
-
 		} else if (t === ')') {
-			while(tsStack[tsStack.length - 1] !== '(') {
+			while (tsStack[tsStack.length - 1] !== '(') {
 				oq.push(tsStack.pop());
 			}
 
@@ -125,7 +131,7 @@ var calc = function(tokens) {
 		}
 	}
 
-	while(tsStack.length) {
+	while (tsStack.length) {
 		oq.push(tsStack.pop());
 	}
 
@@ -135,12 +141,11 @@ var calc = function(tokens) {
 	var opd2;
 	var val;
 
-	for(var n = 0; n < oq.length; n++) {
+	for (var n = 0; n < oq.length; n++) {
 		el = oq[n];
 
-		if(!isNaN(el)) {
+		if (!isNaN(el)) {
 			stack.push(el);
-
 		} else if (el in operators) {
 			opd1 = stack.pop();
 			opd2 = stack.pop();
@@ -151,11 +156,9 @@ var calc = function(tokens) {
 	}
 
 	return stack[0];
-}
+};
 
-
-input.addEventListener('change', function(evt) {
+input.addEventListener('change', function (evt) {
 	output.textContent = calc(getTokens(input.value));
-})
-
-},{}]},{},[21])
+});
+},{}]},{},[313])

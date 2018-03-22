@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,23 +71,23 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({19:[function(require,module,exports) {
-var findPrimeNums = function(startIndex, stopIndex) {
+})({310:[function(require,module,exports) {
+var findPrimeNums = function findPrimeNums(startIndex, stopIndex) {
 	var count = 0;
 	var tbody = document.querySelector('.js-prime-tbody');
 	var row = 1;
 	var alpha = 0.02;
 
-	for(var i = startIndex; i <= stopIndex; i++) {
+	for (var i = startIndex; i <= stopIndex; i++) {
 
 		var k = 1;
 
 		do {
 			k++;
 
-			if(k === i) {
+			if (k === i) {
 
-				if( !(count % 12) && count !== 0 ) {
+				if (!(count % 12) && count !== 0) {
 					row++;
 				}
 
@@ -94,13 +96,11 @@ var findPrimeNums = function(startIndex, stopIndex) {
 				count++;
 				alpha += 0.0045;
 			}
-
-		} while(i % k && k < i);
+		} while (i % k && k < i);
 	}
 
 	document.querySelector('.js-prime-count').innerText = 'Общее количество простых чисел: ' + count;
-}
+};
 
 findPrimeNums(1, 1000);
-
-},{}]},{},[19])
+},{}]},{},[310])

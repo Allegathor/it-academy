@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,13 +71,13 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({30:[function(require,module,exports) {
+})({340:[function(require,module,exports) {
 
-},{"./../assets/bg-skyscraper.png":51}],15:[function(require,module,exports) {
+},{"./../assets/bg-skyscraper.png":[["b6,37:[function(require,module,exports) {
+'use st,37:[function(require,module,exports) {
 'use strict';
 
-require('./../styles/main.css');
-},{"./../styles/main.css":30}],53:[function(require,module,exports) {
+require('./../sty,343:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -88,7 +90,7 @@ function getBundleURLCached() {
 function getBundleURL() {
   // Attempt to find the URL of the current script and use that as the base URL
   try {
-    throw new Error;
+    throw new Error();
   } catch (err) {
     var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
     if (matches) {
@@ -105,11 +107,14 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-
-},{}],52:[function(require,module,exports) {
+},{}],342:[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
+  if (!Array.isArray(bundles)) {
+    bundles = [bundles];
+  }
+
   var id = bundles[bundles.length - 1];
 
   try {
@@ -117,8 +122,7 @@ function loadBundlesLazy(bundles) {
   } catch (err) {
     if (err.code === 'MODULE_NOT_FOUND') {
       return new LazyPromise(function (resolve, reject) {
-        loadBundles(bundles)
-          .then(resolve, reject);
+        loadBundles(bundles).then(resolve, reject);
       });
     }
 
@@ -129,10 +133,9 @@ function loadBundlesLazy(bundles) {
 function loadBundles(bundles) {
   var id = bundles[bundles.length - 1];
 
-  return Promise.all(bundles.slice(0, -1).map(loadBundle))
-    .then(function () {
-      return require(id);
-    });
+  return Promise.all(bundles.slice(0, -1).map(loadBundle)).then(function () {
+    return require(id);
+  });
 }
 
 var bundleLoaders = {};
@@ -156,19 +159,18 @@ function loadBundle(bundle) {
     return bundles[bundle];
   }
 
-  var type = bundle.match(/\.(.+)$/)[1].toLowerCase();
+  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
   var bundleLoader = bundleLoaders[type];
   if (bundleLoader) {
-    return bundles[bundle] = bundleLoader(getBundleURL() + bundle)
-      .then(function (resolved) {
-        if (resolved) {
-          module.bundle.modules[id] = [function (require,module) {
-            module.exports = resolved;
-          }, {}];
-        }
+    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
+      if (resolved) {
+        module.bundle.modules[id] = [function (require, module) {
+          module.exports = resolved;
+        }, {}];
+      }
 
-        return resolved;
-      });
+      return resolved;
+    });
   }
 }
 
@@ -184,7 +186,6 @@ LazyPromise.prototype.then = function (onSuccess, onError) {
 LazyPromise.prototype.catch = function (onError) {
   return this.promise || (this.promise = new Promise(this.executor).catch(onError));
 };
-
-},{"./bundle-url":53}],0:[function(require,module,exports) {
-var b=require(52);b.load([["b6731838303b30817085ef05b9e34141.png",51],15]);
+},{"./bundle-url":343}],0:[function(require,module,exports) {
+var b=require(342);b.load([["b6731838303b30817085ef05b9e34141.png",341],37]);
 },{}]},{},[0])

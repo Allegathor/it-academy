@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,94 +71,92 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({29:[function(require,module,exports) {
+})({314:[function(require,module,exports) {
 var btn = document.getElementById('count-btn');
 var input = document.getElementById('text-area');
 
-var countVowels = function(string) {
-  string = string.toLowerCase();
-  var vowels = {
-    'а': 0, 'е': 0, 'ё': 0, 'и': 0,
-    'о': 0, 'у': 0, 'э': 0, 'ю': 0,
-    'я': 0, 'ы': 0
-  }
-
-  var char;
-  var count = 0;
-
-  for(var i = 0; i < string.length; i++) {
-   char = string[i];
-   if (char in vowels) {
-     count++;
-   }
-  }
-
-  return count;
-}
-
-var countVowelsFE = function(string) {
+var countVowels = function countVowels(string) {
 	string = string.toLowerCase();
-  var vowels = {
-    'а': 0, 'е': 0, 'ё': 0, 'и': 0,
-    'о': 0, 'у': 0, 'э': 0, 'ю': 0,
-    'я': 0, 'ы': 0
-  }
+	var vowels = {
+		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
+		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
+		'я': 0, 'ы': 0
+	};
 
+	var char;
 	var count = 0;
-	var countVow = function(ch, i) {
-		if (ch in vowels) {
+
+	for (var i = 0; i < string.length; i++) {
+		char = string[i];
+		if (char in vowels) {
 			count++;
 		}
 	}
+
+	return count;
+};
+
+var countVowelsFE = function countVowelsFE(string) {
+	string = string.toLowerCase();
+	var vowels = {
+		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
+		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
+		'я': 0, 'ы': 0
+	};
+
+	var count = 0;
+	var countVow = function countVow(ch, i) {
+		if (ch in vowels) {
+			count++;
+		}
+	};
 	string.split('').forEach(countVow);
 
 	return count;
-}
+};
 
-var countVowelsFilter = function(string) {
+var countVowelsFilter = function countVowelsFilter(string) {
 	string = string.toLowerCase();
 	var vowels = {
 		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
 		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
 		'я': 0, 'ы': 0
-	}
+	};
 
-	var filterByType = function(ch, i) {
+	var filterByType = function filterByType(ch, i) {
 		if (ch in vowels) {
 			return true;
 		}
-	}
+	};
 
 	return string.split('').filter(filterByType).length;
-}
+};
 
-var countVowelsReduce = function(string) {
+var countVowelsReduce = function countVowelsReduce(string) {
 	string = string.toLowerCase();
 	var vowels = {
 		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
 		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
 		'я': 0, 'ы': 0
-	}
+	};
 
-	var reduceToVowCount = function(acc, ch) {
+	var reduceToVowCount = function reduceToVowCount(acc, ch) {
 		if (ch in vowels) {
 			return ++acc;
 		}
 
 		return acc;
-	}
+	};
 
 	return string.split('').reduce(reduceToVowCount, 0);
-}
+};
 
-
-var btnHandler = function() {
-  console.log(countVowels(input.value));
-  console.log('forEach: ' + countVowelsFE(input.value));
-  console.log('filter: ' + countVowelsFilter(input.value));
-  console.log('reduce: ' + countVowelsReduce(input.value));
-}
+var btnHandler = function btnHandler() {
+	console.log(countVowels(input.value));
+	console.log('forEach: ' + countVowelsFE(input.value));
+	console.log('filter: ' + countVowelsFilter(input.value));
+	console.log('reduce: ' + countVowelsReduce(input.value));
+};
 
 btn.addEventListener('click', btnHandler);
-
-},{}]},{},[29])
+},{}]},{},[314])
