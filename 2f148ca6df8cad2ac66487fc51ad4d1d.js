@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,11 +71,11 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({31:[function(require,module,exports) {
-var ready = function() {
+})({316:[function(require,module,exports) {
+var ready = function ready() {
 	var btn = document.querySelector('.js-data-btn');
 
-	var formatData = function(userData) {
+	var formatData = function formatData(userData) {
 		var main;
 
 		var ageNum = parseInt(userData.age.value, 10);
@@ -84,88 +86,76 @@ var ready = function() {
 
 		main = 'Ваше ФИО: ' + userData.name.value + ' ' + userData.surname.value + ' ' + userData.patr.value;
 		ageYears = 'Ваш возраст в годах: ' + userData.age.value;
-		ageDays = 'Ваш возраст в днях: ' + (ageNum * 365);
+		ageDays = 'Ваш возраст в днях: ' + ageNum * 365;
 		ageInFive = 'Через пять лет вам будет: ' + (ageNum + 5);
 
-		gender = (userData.gender.value === true) ? 'Пол: мужской' : 'Пол: женский';
+		gender = userData.gender.value === true ? 'Пол: мужской' : 'Пол: женский';
 
-		(gender) ?
-		(retirement = (ageNum >= 61) ? 'Вы на пенсии: да' : 'Вы на пенсии: нет') :
-		(retirement = (ageNum >= 56) ? 'Вы на пенсии: да' : 'Вы на пенсии: нет');
+		gender ? retirement = ageNum >= 61 ? 'Вы на пенсии: да' : 'Вы на пенсии: нет' : retirement = ageNum >= 56 ? 'Вы на пенсии: да' : 'Вы на пенсии: нет';
 
 		alert(main + '\n' + ageYears + '\n' + ageDays + '\n' + ageInFive + '\n' + gender + '\n' + retirement);
+	};
 
-	}
-
-	var isValid = function(value, type) {
+	var isValid = function isValid(value, type) {
 		var toIntAttempt = parseInt(value, 10);
 		if (value !== '' && value !== null) {
-			if ( type === 'string' && isNaN(toIntAttempt) ) {
+			if (type === 'string' && isNaN(toIntAttempt)) {
 				return true;
-
-			} else if ( type === 'number' && !isNaN(toIntAttempt) &&
-			(toIntAttempt > 0 && toIntAttempt < 130) ) {
+			} else if (type === 'number' && !isNaN(toIntAttempt) && toIntAttempt > 0 && toIntAttempt < 130) {
 				return true;
-
 			} else {
 				return false;
 			}
 		}
 
 		return false;
+	};
 
-	}
-
-	var canShowNext  = function(prop) {
+	var canShowNext = function canShowNext(prop) {
 		var expType;
 		var fail;
 		var failMsg;
 
 		if (!prop.confirm) {
 
-			expType = (!prop.num) ? 'string' : 'number';
+			expType = !prop.num ? 'string' : 'number';
 			fail = false;
-			failMsg = (!prop.num) ? ' корректно! (поле не должно быть пустым; используйте кириллицу/латиницу; числовые значения не допускаются)' : ' корректно! (поле не должно быть пустым, а введёное значение должно являться числом, которое больше 0, но меньше 130)';
+			failMsg = !prop.num ? ' корректно! (поле не должно быть пустым; используйте кириллицу/латиницу; числовые значения не допускаются)' : ' корректно! (поле не должно быть пустым, а введёное значение должно являться числом, которое больше 0, но меньше 130)';
 
 			while (!isValid(prop.value, expType)) {
-				prop.value = (!fail) ? prompt(prop.msg, '') :
-				prompt(prop.msg + failMsg, '');
+				prop.value = !fail ? prompt(prop.msg, '') : prompt(prop.msg + failMsg, '');
 
 				fail = true;
 			}
-
 		} else {
 			prop.value = confirm(prop.msg);
-
 		}
 
 		return true;
-	}
+	};
 
-	var getData = function() {
+	var getData = function getData() {
 		var user = {};
 
-		user.name 		= { msg:'Введите имя', value: '' };
-		user.surname	= { msg: 'Введите фамилию', value: '' };
-		user.patr			= { msg: 'Введите отчество', value: ''};
-		user.age			= { msg: 'Введите возраст', value: '', num: true };
-		user.gender		= { msg: 'Ваш пол — мужской? (Ок — да, отмена — нет)', value: 0, confirm: true };
+		user.name = { msg: 'Введите имя', value: '' };
+		user.surname = { msg: 'Введите фамилию', value: '' };
+		user.patr = { msg: 'Введите отчество', value: '' };
+		user.age = { msg: 'Введите возраст', value: '', num: true };
+		user.gender = { msg: 'Ваш пол — мужской? (Ок — да, отмена — нет)', value: 0, confirm: true };
 
 		for (prop in user) {
 			var res = canShowNext(user[prop]);
 		}
 
 		formatData(user);
-
-	}
+	};
 
 	getData();
 
-	btn.addEventListener('click', function(evt){
+	btn.addEventListener('click', function (evt) {
 		getData();
-	})
-}
+	});
+};
 
-window.addEventListener('load', ready)
-
-},{}]},{},[31])
+window.addEventListener('load', ready);
+},{}]},{},[316])

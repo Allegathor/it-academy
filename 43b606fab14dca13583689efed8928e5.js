@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({23:[function(require,module,exports) {
+})({326:[function(require,module,exports) {
 var input = document.getElementById('year-input');
 var centuryOut = document.getElementById('century');
 
@@ -78,8 +80,7 @@ function getCentury(s) {
 	return Math.ceil(y / 100) || 0;
 }
 
-input.addEventListener('input', function(evt) {
+input.addEventListener('input', function (evt) {
 	centuryOut.textContent = getCentury(input.value) + ' век';
-})
-
-},{}]},{},[23])
+});
+},{}]},{},[326])

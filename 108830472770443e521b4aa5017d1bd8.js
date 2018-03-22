@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,10 +71,10 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({27:[function(require,module,exports) {
+})({315:[function(require,module,exports) {
 var btn = document.querySelector('.js-data-btn');
 
-var findSubStr = function(str, k) {
+var findSubStr = function findSubStr(str, k) {
 	var subStrArr = str.split(' ');
 	var head = 1;
 	var q = [];
@@ -89,29 +91,27 @@ var findSubStr = function(str, k) {
 				if (q.length > k) {
 					q.pop();
 				}
-
 			}
-
 		}
 
 		res = q.join(';');
 		alert(res);
-
 	} else {
 		res = subStrArr.join(';');
 		alert(res);
 	}
-}
+};
 
-var requestText = function() {
+var requestText = function requestText() {
 	var text = prompt('Введите текст', '');
-	if (text === null) { return; }
+	if (text === null) {
+		return;
+	}
 
 	findSubStr(text, 3);
-}
+};
 
-btn.addEventListener('click', function(evt){
+btn.addEventListener('click', function (evt) {
 	requestText();
-})
-
-},{}]},{},[27])
+});
+},{}]},{},[315])

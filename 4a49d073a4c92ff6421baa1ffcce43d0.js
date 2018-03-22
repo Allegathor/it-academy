@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,44 +71,42 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({32:[function(require,module,exports) {
+})({319:[function(require,module,exports) {
 function htmlEscape(text) {
-	return text.replace(/[<>&"']/gi, function(match) {
-		switch(match) {
-			case('<'):
+	return text.replace(/[<>&"']/gi, function (match) {
+		switch (match) {
+			case '<':
 				return '&lt;';
 				break;
-			case('>'):
+			case '>':
 				return '&gt;';
 				break;
-			case('&'):
+			case '&':
 				return '&amp;';
 				break;
-			case("'"):
+			case "'":
 				return '&apos;';
 				break;
-			case('"'):
+			case '"':
 				return '&quot;';
 				break;
 		}
-	})
+	});
 }
 
 function buildWrapper(tag) {
 
-	return function(innerText) {
+	return function (innerText) {
 		var escapedText = htmlEscape(innerText);
 
 		return '<' + tag + '>' + escapedText + '</' + tag + '>';
-	}
-
+	};
 }
 
-var testStr = `In JS 'a' > 10 returns false, but "a" > "10" returns true`;
+var testStr = 'In JS \'a\' > 10 returns false, but "a" > "10" returns true';
 var wrapH2 = buildWrapper('H2');
 var wrapP = buildWrapper('P');
 
 console.log(wrapH2(testStr));
 console.log(wrapP(testStr));
-
-},{}]},{},[32])
+},{}]},{},[319])

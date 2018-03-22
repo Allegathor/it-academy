@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,32 +71,31 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({26:[function(require,module,exports) {
+})({324:[function(require,module,exports) {
 var btn = document.getElementById('trim-string');
 var input = document.getElementById('input-string');
 
-var trimString = function(string) {
+var trimString = function trimString(string) {
   var i = 0;
   var j = string.length - 1;
 
-  while (string.charAt(i) === '\u0020') {
+  while (string.charAt(i) === ' ') {
     i++;
   }
 
-  while (string.charAt(j) === '\u0020' && j >= i) {
+  while (string.charAt(j) === ' ' && j >= i) {
     j--;
   }
 
   string = string.substring(i, j + 1);
   return string;
-}
+};
 
-var btnHandler = function() {
-  console.log('input: "' + input.value + '"')
+var btnHandler = function btnHandler() {
+  console.log('input: "' + input.value + '"');
   var trimmed = trimString(input.value);
   console.log('output: "' + trimmed + '"');
-}
+};
 
 btn.addEventListener('click', btnHandler);
-
-},{}]},{},[26])
+},{}]},{},[324])

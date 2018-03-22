@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,16 +71,15 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({24:[function(require,module,exports) {
+})({312:[function(require,module,exports) {
 var testStr = 'abcdef';
 
-var reverseString = function(str) {
+var reverseString = function reverseString(str) {
 	var chars = str.split('');
 	var reversedStr = chars.reverse().join('');
 
 	return reversedStr;
-}
+};
 
 console.log(reverseString(testStr));
-
-},{}]},{},[24])
+},{}]},{},[312])

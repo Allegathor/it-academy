@@ -34,10 +34,10 @@ require = (function (modules, cache, entry) {
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module;
+      var module = cache[name] = new newRequire.Module(name);
 
       modules[name][0].call(module.exports, localRequire, module, module.exports);
     }
@@ -53,11 +53,13 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
@@ -69,18 +71,17 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({25:[function(require,module,exports) {
+})({333:[function(require,module,exports) {
 var btn = document.querySelector('.js-data-btn');
 
-
-var formatData = function(userData) {
+var formatData = function formatData(userData) {
 	var formatted = {};
 
 	var ageNum = parseInt(userData.age, 10);
 
 	formatted.main = 'ФИО: ' + userData.name + ' ' + userData.surname + ' ' + userData.patr;
 	formatted.ageYears = 'Возраст, лет: ' + userData.age;
-	formatted.ageDays = 'Возраст, дней: ' + (ageNum * 365);
+	formatted.ageDays = 'Возраст, дней: ' + ageNum * 365;
 
 	if (userData.gender === true) {
 		formatted.gender = 'Пол: мужской';
@@ -90,44 +91,51 @@ var formatData = function(userData) {
 
 	if (userData.gender && ageNum >= 61) {
 		formatted.retirement = 'Пенсионный возраст: да';
-	} else if(!userData.gender && ageNum >= 56) {
+	} else if (!userData.gender && ageNum >= 56) {
 		formatted.retirement = 'Пенсионный возраст: да';
 	} else {
 		formatted.retirement = 'Пенсионный возраст: нет';
 	}
 
 	alert(formatted.main + '\n' + formatted.ageYears + '\n' + formatted.ageDays + '\n' + formatted.gender + '\n' + formatted.retirement);
+};
 
-}
-
-var requestData = function() {
+var requestData = function requestData() {
 	var user = {};
 
 	user.name = prompt('Введите имя', '');
-	if (user.name === null) { return; }
+	if (user.name === null) {
+		return;
+	}
 
 	user.surname = prompt('Введите фамилию', '');
-	if (user.surname === null) { return; }
+	if (user.surname === null) {
+		return;
+	}
 
 	user.patr = prompt('Введите отчество', '');
-	if (user.patr === null) { return; }
+	if (user.patr === null) {
+		return;
+	}
 
 	user.age = prompt('Введите возраст', '');
-	if (user.age === null) { return; }
+	if (user.age === null) {
+		return;
+	}
 
-	user.gender = confirm('Вы мужчина?')
-	if (user.gender === null) { return; }
+	user.gender = confirm('Вы мужчина?');
+	if (user.gender === null) {
+		return;
+	}
 
 	if (user) {
 		formatData(user);
 	}
-
-}
+};
 
 requestData();
 
-btn.addEventListener('click', function(evt){
+btn.addEventListener('click', function (evt) {
 	requestData();
-})
-
-},{}]},{},[25])
+});
+},{}]},{},[333])
