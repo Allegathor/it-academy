@@ -1,0 +1,5 @@
+mixin scripts(scripts)
+	each src in scripts
+		- var isExternal = /^(:?https?\:)?\/\//i
+		- src = isExternal.test(src) ? src : `assets/scripts/${src}`
+		script(src= src)

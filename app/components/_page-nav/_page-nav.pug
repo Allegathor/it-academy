@@ -1,0 +1,44 @@
+include ../_nav-item/_nav-item.pug
+
+mixin page-nav
+	.uk-navbar-container
+		.uk-container.uk-container-expand.uk-background-primary.uk-light
+			nav.uk-navbar.uk-dark(uk-navbar)
+				.uk-navbar-right
+					ul.uk-navbar-nav
+						-
+							var navMap = {
+								'Главная': 'index.html',
+								'Задания A': {
+									page: 'tasks-a.html',
+									subnav: {
+										'A2+': '#',
+										'A3+': '#'
+									}
+								},
+								'Задания B': {
+									page: 'tasks-b.html',
+									subnav: {
+										'B1+: Определить век': 'century.html',
+										'B2+: Перевернуть строку': '#',
+										'B3+: Функция-калькулятор': '#',
+										'B4+: Цепочка слов': '#',
+										'B5+: Функция для оборачивания в тег': '#'
+									}
+								},
+								'Задания N': {
+									page: 'tasks-n.html',
+									subnav: {
+										'N.07': '#'
+									}
+								}
+							}
+												
+						each prop, item in navMap
+							- var urlString = (typeof prop === 'string') ? prop : prop.page
+							+nav-item(item, urlString)
+								if prop.subnav
+									.uk-navbar-dropdown
+										ul.uk-nav.uk-navbar-dropdown-nav
+											each url, subItem in prop.subnav
+												+nav-item(subItem, url)

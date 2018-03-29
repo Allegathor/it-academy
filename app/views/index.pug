@@ -1,0 +1,16 @@
+extends ../templates/_layout.pug
+
+include ../components/_page-nav/_page-nav.pug
+
+block head
+	- var pageTitle= 'Главная'
+	- var current = 'Главная'
+
+block content
+	+page-nav
+	main
+		.uk-section.uk-section-default
+			.uk-container.uk-container-small.uk-position-relative
+				h1.uk-h1 Задания к курсу &laquo;Разработка веб-приложений на &nbsp;Javascript&raquo;
+				p Hello, world!
+				p Hello, world!

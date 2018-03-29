@@ -1,0 +1,12 @@
+extends ../templates/_layout.pug
+
+include ../components/_page-nav/_page-nav.pug
+
+block head
+	- var pageTitle = 'Главная'
+	- var current = 'B1+: Определить век'
+
+block content
+	+page-nav
+	main
+		p Hello, world!

@@ -1,0 +1,3 @@
+.main
+	.big-class
+		a(href='#') click me

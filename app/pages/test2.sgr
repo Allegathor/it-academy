@@ -1,0 +1,4 @@
+.accept
+	form
+		input(type='text')
+		input(type='text')

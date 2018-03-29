@@ -1,7 +1,9 @@
-include /pug-lib/_page.pug
+include _scripts.pug
+include _page.pug
 
 doctype html
 html(lang='ru')
-	include /templates/_head.pug
+	include _head.pug
 	+page
 		block content
+		+scripts(['app.js', 'vendors.js'])

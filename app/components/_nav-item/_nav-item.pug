@@ -1,0 +1,4 @@
+mixin nav-item(title, url)
+	li(class=(title == current) ? 'uk-active' : '')&attributes(attributes)
+		a(href=url)= title
+		block

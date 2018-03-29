@@ -1,0 +1,40 @@
+head
+	link(rel='stylesheet' type='text/css' href='assets/styles/app.css')
+
+body
+	nav.uk-navbar(uk-navbar)
+		.uk-navbar-left
+		.uk-navbar-right
+			ul.uk-navbar-nav
+				li.uk-active: a(href='#') Главная
+
+
+				li
+					a(href='#') Задания A
+					.uk-navbar-dropdown
+						ul.uk-nav.uk-navbar-dropdown-nav
+							li: a(href='#') A2+
+							li: a(href='#') A3+
+
+				li
+					a(href='#') Задания B
+					.uk-navbar-dropdown
+						ul.uk-nav.uk-navbar-dropdown-nav
+							li: a(href='#') B1+
+							li: a(href='#') B2+
+							li: a(href='#') B3+
+							li: a(href='#') B4+
+							li: a(href='#') B5+
+
+				li
+					a(href='#') Задания N
+					.uk-navbar-dropdown
+						ul.uk-nav.uk-navbar-dropdown-nav
+							li: a(href='#') N.05
+							li: a(href='#') N.07, N.17
+							li: a(href='#') N.10
+
+	main
+		p Hello, World!
+
+	script(type='text/javascript' src='vendors.js')
