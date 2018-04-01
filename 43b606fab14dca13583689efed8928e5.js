@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({326:[function(require,module,exports) {
+})({52:[function(require,module,exports) {
 var input = document.getElementById('year-input');
 var centuryOut = document.getElementById('century');
 
@@ -83,4 +83,4 @@ function getCentury(s) {
 input.addEventListener('input', function (evt) {
 	centuryOut.textContent = getCentury(input.value) + ' век';
 });
-},{}]},{},[326])
+},{}]},{},[52])
