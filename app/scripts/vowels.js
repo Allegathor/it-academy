@@ -2,33 +2,33 @@ var btn = document.getElementById('count-btn');
 var input = document.getElementById('text-area');
 
 var countVowels = function(string) {
-  string = string.toLowerCase();
-  var vowels = {
-    'а': 0, 'е': 0, 'ё': 0, 'и': 0,
-    'о': 0, 'у': 0, 'э': 0, 'ю': 0,
-    'я': 0, 'ы': 0
-  }
+	string = string.toLowerCase();
+	var vowels = {
+		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
+		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
+		'я': 0, 'ы': 0
+	}
 
-  var char;
-  var count = 0;
+	var char;
+	var count = 0;
 
-  for(var i = 0; i < string.length; i++) {
-   char = string[i];
-   if (char in vowels) {
-     count++;
-   }
-  }
+	for(var i = 0; i < string.length; i++) {
+	 char = string[i];
+	 if (char in vowels) {
+		 count++;
+	 }
+	}
 
-  return count;
+	return count;
 }
 
 var countVowelsFE = function(string) {
 	string = string.toLowerCase();
-  var vowels = {
-    'а': 0, 'е': 0, 'ё': 0, 'и': 0,
-    'о': 0, 'у': 0, 'э': 0, 'ю': 0,
-    'я': 0, 'ы': 0
-  }
+	var vowels = {
+		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
+		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
+		'я': 0, 'ы': 0
+	}
 
 	var count = 0;
 	var countVow = function(ch, i) {
@@ -79,10 +79,10 @@ var countVowelsReduce = function(string) {
 
 
 var btnHandler = function() {
-  console.log(countVowels(input.value));
-  console.log('forEach: ' + countVowelsFE(input.value));
-  console.log('filter: ' + countVowelsFilter(input.value));
-  console.log('reduce: ' + countVowelsReduce(input.value));
+	console.log(countVowels(input.value));
+	console.log('forEach: ' + countVowelsFE(input.value));
+	console.log('filter: ' + countVowelsFilter(input.value));
+	console.log('reduce: ' + countVowelsReduce(input.value));
 }
 
 btn.addEventListener('click', btnHandler);

@@ -4,21 +4,21 @@ var arr2 = [[], ['1', '1'], 2, [1, 4, [[2, 1, 3], [4, 2]], 5], [4, 6, [3, 7, 5]]
 
 var treeSum = function(arr) {
 
-  var sum = 0;
+	var sum = 0;
 
-  for (var i = 0; i < arr.length; i++) {
-    var el = arr[i];
+	for (var i = 0; i < arr.length; i++) {
+		var el = arr[i];
 
-    if (Array.isArray(el) && (el.length)) {
-      sum += treeSum(el);
+		if (Array.isArray(el) && (el.length)) {
+			sum += treeSum(el);
 
-    } else {
-      sum += parseFloat(el) || 0;
+		} else {
+			sum += parseFloat(el) || 0;
 
-    }
-  }
+		}
+	}
 
-  return sum;
+	return sum;
 }
 
 console.log( 'Loop: \nsum1 =', treeSum(arr1), '\nsum2 =', treeSum(arr2) );
