@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({110:[function(require,module,exports) {
+})({333:[function(require,module,exports) {
 var HashStorage = function HashStorage() {
 	this.storage = {};
 };
@@ -156,4 +156,4 @@ btnAdd.addEventListener('click', btnAddHandler);
 btnGet.addEventListener('click', btnGetHandler);
 btnDel.addEventListener('click', btnDelHandler);
 btnLi.addEventListener('click', btnLiHandler);
-},{}]},{},[110])
+},{}]},{},[333])

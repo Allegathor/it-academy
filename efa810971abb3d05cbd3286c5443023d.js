@@ -71,31 +71,31 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({48:[function(require,module,exports) {
+})({328:[function(require,module,exports) {
 var btn = document.getElementById('trim-string');
 var input = document.getElementById('input-string');
 
 var trimString = function trimString(string) {
-  var i = 0;
-  var j = string.length - 1;
+	var i = 0;
+	var j = string.length - 1;
 
-  while (string.charAt(i) === ' ') {
-    i++;
-  }
+	while (string.charAt(i) === ' ') {
+		i++;
+	}
 
-  while (string.charAt(j) === ' ' && j >= i) {
-    j--;
-  }
+	while (string.charAt(j) === ' ' && j >= i) {
+		j--;
+	}
 
-  string = string.substring(i, j + 1);
-  return string;
+	string = string.substring(i, j + 1);
+	return string;
 };
 
 var btnHandler = function btnHandler() {
-  console.log('input: "' + input.value + '"');
-  var trimmed = trimString(input.value);
-  console.log('output: "' + trimmed + '"');
+	console.log('input: "' + input.value + '"');
+	var trimmed = trimString(input.value);
+	console.log('output: "' + trimmed + '"');
 };
 
 btn.addEventListener('click', btnHandler);
-},{}]},{},[48])
+},{}]},{},[328])
