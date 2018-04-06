@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({336:[function(require,module,exports) {
+})({53:[function(require,module,exports) {
 var isLeapYear = function isLeapYear(year) {
 
 	if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
@@ -117,4 +117,4 @@ console.log(calcDays('44', '1912'));
 console.log(calcDays('2', null));
 console.log(calcDays(null, null));
 console.log(calcDays());
-},{}]},{},[336])
+},{}]},{},[53])

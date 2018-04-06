@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({327:[function(require,module,exports) {
+})({60:[function(require,module,exports) {
 function htmlEscape(text) {
 	return text.replace(/[<>&"']/gi, function (match) {
 		switch (match) {
@@ -109,4 +109,4 @@ var wrapP = buildWrapper('P');
 
 console.log(wrapH2(testStr));
 console.log(wrapP(testStr));
-},{}]},{},[327])
+},{}]},{},[60])
