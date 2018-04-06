@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta lang='ru'>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Тестовые задания</title>
+
+	<style>
+		#sites-form {
+			padding-top: 20px;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
+		input.full {
+			flex-grow: 1;
+		}
+
+		input.half {
+			flex-basis: 50%;
+		}
+
+		input.small {
+			flex-basis: 25%;
+			min-width: 0;
+		}
+
+		div > label:first-child {
+			flex-basis: 150px;
+		}
+
+		.wrap {
+			display: flex;
+			flex-wrap: wrap;
+			margin-bottom: 18px;
+		}
+	</style>
+</head>
+<body>
+	<form id="sites-form" method="post" action="http://fe.it-academy.by/TestForm.php">
+		<div class="wrap">
+			<label for="">Разработчики:</label>
+			<input type="text" name="devs" class="full">
+		</div>
+
+		<div class="wrap">
+			<label for="">Название сайта:</label>
+			<input type="text" name="sitename" class="full">
+		</div>
+
+		<div class="wrap">
+			<label for="">URL сайта:</label>
+			<input type="text" name="url" class="full">
+		</div>
+
+		<div class="wrap">
+			<label for="">Дата запуска сайта:</label>
+			<input type="text" name="launch-date" class="small">
+		</div>
+
+		<div class="wrap">
+			<label for="">Посетителей в сутки:</label>
+			<input type="text" name="visitors" class="small">
+		</div>
+
+		<div class="wrap">
+			<label for="">E-mail для связи:</label>
+			<input type="text" name="email" class="half">
+		</div>
+
+		<div class="wrap">
+			<label for="">Рубрика каталога:</label>
+			<select name="section" id="">
+				<option value="1">Здоровье</option>
+				<option value="2">Домашний уют</option>
+				<option value="3">Бытовая техника</option>
+			</select>
+		</div>
+
+		<div class="wrap">
+			<label for="">Размещение:</label>
+			<input type="radio" value="1" name="payment">
+			<label for="">Бесплатное</label>
+			<input type="radio" value="2" name="payment">
+			<label for="">Платное</label>
+			<input type="radio" value="3" name="payment">
+			<label for="">VIP</label>
+		</div>
+
+		<div class="wrap">
+			<label for="">Разрешить отзывы:</label>
+			<input type="checkbox" name="allow-feedback">
+		</div>
+
+		<div class="wrap">
+			<label for="">Описание сайта:</label>
+			<textarea name="description" rows="8" cols="80"></textarea>
+		</div>
+
+		<div class="wrap">
+			<input id='send-btn' type="submit" value="Опубликовать">
+		</div>
+
+	</form>
+
+<script src="./../scripts/valid_form.js"></script>
+</body>
