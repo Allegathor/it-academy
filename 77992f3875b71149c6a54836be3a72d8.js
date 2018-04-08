@@ -71,13 +71,13 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({67:[function(require,module,exports) {
+})({41:[function(require,module,exports) {
 var form = document.getElementById('sites-form');
 form.position = 'relative';
 form.noValidate = true;
 
 var formElements = Array.prototype.filter.call(form.elements, function (el) {
-	if (el.type !== 'submit' && el.tagName !== 'BTN') {
+	if (el.type !== 'submit' && el.tagName !== 'BUTTON') {
 		return el;
 	}
 });
@@ -160,7 +160,7 @@ var removeWarnLabel = function removeWarnLabel(id, mountPoint) {
 	return;
 };
 
-var notify = function notify(el, success, msg) {
+var isValidVal = function isValidVal(el, success, msg) {
 	msg = msg || '';
 
 	var id = el.name + '-warn';
@@ -179,7 +179,7 @@ var notify = function notify(el, success, msg) {
 	}
 };
 
-var checkInputs = function checkInputs(el, type) {
+var checkInputValidity = function checkInputValidity(el, type) {
 	var name = el.name || '';
 	var val = el.value || '';
 
@@ -190,20 +190,20 @@ var checkInputs = function checkInputs(el, type) {
 				val = val.toLowerCase();
 				var urlPattern = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/;
 
-				return val.match(urlPattern) ? notify(el, true) : notify(el, false, 'Неправильный адрес сайта');
+				return val.match(urlPattern) ? isValidVal(el, true) : isValidVal(el, false, 'Неправильный адрес сайта');
 			}
 
 			if (name === 'email') {
 				val = val.toLowerCase();
 				var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-				return val.match(emailPattern) ? notify(el, true) : notify(el, false, 'Неправильный адрес почты');
+				return val.match(emailPattern) ? isValidVal(el, true) : isValidVal(el, false, 'Неправильный адрес почты');
 			}
 
 			if (name === 'visitors') {
 				val = parseInt(val);
 
-				return !isNaN(val) && val >= 0 ? notify(el, true) : notify(el, false, 'Значение должно быть положительным числом');
+				return !isNaN(val) && val >= 0 ? isValidVal(el, true) : isValidVal(el, false, 'Значение должно быть положительным числом');
 			}
 
 			if (name === 'launch-date') {
@@ -218,20 +218,20 @@ var checkInputs = function checkInputs(el, type) {
 					var m = dateNums[1] - 1;
 					var y = dateNums[2];
 
-					return isValidDate(d, m, y) ? notify(el, true) : notify(el, false, 'Неверная дата (превышено количество дней или месяцев)');
+					return isValidDate(d, m, y) ? isValidVal(el, true) : isValidVal(el, false, 'Неверная дата (превышено количество дней или месяцев)');
 				} else {
-					return notify(el, false, 'Введите дату в формате дд.мм.гггг');
+					return isValidVal(el, false, 'Введите дату в формате дд.мм.гггг');
 				}
 			}
 
-			return notify(el, true);
+			return isValidVal(el, true);
 		} else {
-			return notify(el, false, 'Поле не должно быть пустым');
+			return isValidVal(el, false, 'Поле не должно быть пустым');
 		}
 	}
 
 	if (type === 'checkbox') {
-		return el.checked ? notify(el, true) : notify(el, false, 'Отзывы должны быть включены');
+		return el.checked ? isValidVal(el, true) : isValidVal(el, false, 'Отзывы должны быть включены');
 	}
 
 	if (type === 'option') {}
@@ -240,19 +240,19 @@ var checkInputs = function checkInputs(el, type) {
 		var checked = el.checked;
 
 		if (checked) {
-			return val !== '1' ? notify(el, true) : notify(el, false, 'Размещение не может быть бесплатным');
+			return val !== '1' ? isValidVal(el, true) : isValidVal(el, false, 'Размещение не может быть бесплатным');
 		} else {
 
 			checked = Array.prototype.some.call(paymentRadioBtns, function (btn, i) {
 				el = btn;
 				return btn.checked;
 			});
-			return checked ? notify(el, true) : notify(el, false, 'Выберите одну из опций');
+			return checked ? isValidVal(el, true) : isValidVal(el, false, 'Выберите одну из опций');
 		}
 	}
 
 	if (type === 'select') {
-		return val !== '1' ? notify(el, true) : notify(el, false, 'Выбрана неверная рубрика');
+		return val !== '1' ? isValidVal(el, true) : isValidVal(el, false, 'Выбрана неверная рубрика');
 	}
 
 	return true;
@@ -263,44 +263,44 @@ var formBlurHandler = function formBlurHandler(evt) {
 	var tagName = evt.target.tagName;
 
 	if (type === 'text' || tagName === 'TEXTAREA') {
-		checkInputs(evt.target, 'text');
+		checkInputValidity(evt.target, 'text');
 	}
 };
 
 var chbxChangeHandler = function chbxChangeHandler(evt) {
-	checkInputs(evt.target, 'checkbox');
+	checkInputValidity(evt.target, 'checkbox');
 };
 
 var radioClickHandler = function radioClickHandler(evt) {
-	checkInputs(evt.target, 'radio');
+	checkInputValidity(evt.target, 'radio');
 };
 
 var selectChangeHandler = function selectChangeHandler(evt) {
-	checkInputs(evt.target, 'select');
+	checkInputValidity(evt.target, 'select');
 };
 
 var submitHandler = function submitHandler(evt) {
-	var currentEl = null;
-	var isValid = formElements.every(function (el, i) {
+	var isValid = true;
+	var isFailed = false;
 
-		var valid = false;
-		currentEl = el;
-		tagName = currentEl.tagName;
+	formElements.forEach(function (el, i) {
+
+		tagName = el.tagName;
 
 		if (tagName === 'TEXTAREA') {
-			valid = checkInputs(el, 'text');
+			isValid = checkInputValidity(el, 'text');
 		} else if (tagName === 'SELECT') {
-			valid = checkInputs(el, 'select');
+			isValid = checkInputValidity(el, 'select');
 		} else {
-			valid = checkInputs(el, currentEl.type);
+			isValid = checkInputValidity(el, el.type);
 		}
-		return valid;
-	});
 
-	if (!isValid) {
-		currentEl.focus();
-		evt.preventDefault();
-	}
+		if (!isFailed && !isValid) {
+			isFailed = true;
+			el.focus();
+			evt.preventDefault();
+		}
+	});
 };
 
 form.addEventListener('focusout', formBlurHandler);
@@ -312,4 +312,4 @@ paymentRadioBtns.forEach(function (btn, i) {
 });
 
 submitBtn.addEventListener('click', submitHandler);
-},{}]},{},[67])
+},{}]},{},[41])
