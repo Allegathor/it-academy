@@ -3,7 +3,7 @@ form.position = 'relative';
 form.noValidate = true;
 
 var formElements = Array.prototype.filter.call(form.elements, function(el) {
-	if(el.type !== 'submit' && el.tagName !== 'BTN') {
+	if(el.type !== 'submit' && el.tagName !== 'BUTTON') {
 		return el;
 	}
 })
@@ -89,7 +89,7 @@ var removeWarnLabel = function(id, mountPoint) {
 	return;
 }
 
-var notify = function(el, success, msg) {
+var isValidVal = function(el, success, msg) {
 	msg = msg || '';
 
 	var id = el.name + '-warn';
@@ -110,7 +110,7 @@ var notify = function(el, success, msg) {
 
 }
 
-var checkInputs = function(el, type) {
+var checkInputValidity = function(el, type) {
 	var name = el.name || '';
 	var val = el.value || '';
 
@@ -123,8 +123,8 @@ var checkInputs = function(el, type) {
 					/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/;
 
 				return (val.match(urlPattern)) ?
-				notify(el, true) :
-				notify(el, false, 'Неправильный адрес сайта');
+				isValidVal(el, true) :
+				isValidVal(el, false, 'Неправильный адрес сайта');
 			}
 
 			if(name === 'email') {
@@ -132,16 +132,16 @@ var checkInputs = function(el, type) {
 				var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 				return (val.match(emailPattern)) ?
-				notify(el, true) :
-				notify(el, false, 'Неправильный адрес почты');
+				isValidVal(el, true) :
+				isValidVal(el, false, 'Неправильный адрес почты');
 			}
 
 			if(name === 'visitors') {
 				val = parseInt(val);
 
 				return (!isNaN(val) && val >= 0) ?
-				notify(el, true) :
-				notify(el, false, 'Значение должно быть положительным числом');
+				isValidVal(el, true) :
+				isValidVal(el, false, 'Значение должно быть положительным числом');
 			}
 
 			if(name === 'launch-date') {
@@ -155,27 +155,27 @@ var checkInputs = function(el, type) {
 					var y = dateNums[2];
 
 					return (isValidDate(d, m, y)) ?
-					notify(el, true) :
-					notify(el, false, 'Неверная дата (превышено количество дней или месяцев)');
+					isValidVal(el, true) :
+					isValidVal(el, false, 'Неверная дата (превышено количество дней или месяцев)');
 
 				} else {
-					return notify(el, false, 'Введите дату в формате дд.мм.гггг');
+					return isValidVal(el, false, 'Введите дату в формате дд.мм.гггг');
 				}
 
 			}
 
-			return notify(el, true);
+			return isValidVal(el, true);
 
 		} else {
-			return notify(el, false, 'Поле не должно быть пустым');
+			return isValidVal(el, false, 'Поле не должно быть пустым');
 		}
 
 	}
 
 	if(type === 'checkbox') {
 		return (el.checked) ?
-		notify(el, true) :
-		notify(el, false, 'Отзывы должны быть включены');
+		isValidVal(el, true) :
+		isValidVal(el, false, 'Отзывы должны быть включены');
 	}
 
 	if(type === 'option') {
@@ -187,8 +187,8 @@ var checkInputs = function(el, type) {
 
 		if(checked) {
 			return (val !== '1') ?
-			notify(el, true) :
-			notify(el, false, 'Размещение не может быть бесплатным');
+			isValidVal(el, true) :
+			isValidVal(el, false, 'Размещение не может быть бесплатным');
 
 		} else {
 
@@ -197,8 +197,8 @@ var checkInputs = function(el, type) {
 				return btn.checked;
 			})
 			return (checked) ?
-			notify(el, true) :
-			notify(el, false, 'Выберите одну из опций');
+			isValidVal(el, true) :
+			isValidVal(el, false, 'Выберите одну из опций');
 
 		}
 
@@ -206,8 +206,8 @@ var checkInputs = function(el, type) {
 
 	if(type === 'select') {
 		return (val !=='1') ?
-		notify(el, true) :
-		notify(el, false, 'Выбрана неверная рубрика');
+		isValidVal(el, true) :
+		isValidVal(el, false, 'Выбрана неверная рубрика');
 	}
 
 	return true;
@@ -218,44 +218,44 @@ var formBlurHandler = function(evt) {
 	var tagName = evt.target.tagName;
 
 	if(type === 'text' || tagName === 'TEXTAREA') {
-		checkInputs(evt.target, 'text');
+		checkInputValidity(evt.target, 'text');
 	}
 }
 
 var chbxChangeHandler = function(evt) {
-	checkInputs(evt.target, 'checkbox');
+	checkInputValidity(evt.target, 'checkbox');
 }
 
 var radioClickHandler = function(evt) {
-	checkInputs(evt.target, 'radio');
+	checkInputValidity(evt.target, 'radio');
 }
 
 var selectChangeHandler = function(evt) {
-	checkInputs(evt.target, 'select')
+	checkInputValidity(evt.target, 'select')
 }
 
 var submitHandler = function(evt) {
-	var currentEl = null;
-	var isValid = formElements.every(function(el, i) {
+	var isValid = true;
+	var	isFailed = false;
 
-		var valid = false;
-		currentEl = el;
-		tagName = currentEl.tagName;
+	formElements.forEach(function(el, i) {
+
+		tagName = el.tagName;
 
 		if(tagName === 'TEXTAREA') {
-			valid = checkInputs(el, 'text');
+			isValid = checkInputValidity(el, 'text');
 		} else if(tagName === 'SELECT') {
-			valid = checkInputs(el, 'select');
+			isValid = checkInputValidity(el, 'select');
 		} else {
-			valid = checkInputs(el, currentEl.type);
+			isValid = checkInputValidity(el, el.type);
 		}
-		return valid;
-	})
 
-	if(!isValid) {
-		currentEl.focus();
-		evt.preventDefault();
-	}
+		if(!isFailed && !isValid) {
+			isFailed = true;
+			el.focus();
+			evt.preventDefault();
+		}
+	})
 
 }
 
