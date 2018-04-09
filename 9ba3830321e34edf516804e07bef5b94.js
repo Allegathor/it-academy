@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({27:[function(require,module,exports) {
+})({58:[function(require,module,exports) {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var deepClone = function deepClone(val) {
@@ -141,4 +141,4 @@ var n2 = deepClone(n1);
 
 console.log((typeof n2 === 'undefined' ? 'undefined' : _typeof(n2)) === (typeof n1 === 'undefined' ? 'undefined' : _typeof(n1)), 'Must be true');
 console.log(isNaN(n2), 'Must be true');
-},{}]},{},[27])
+},{}]},{},[58])
