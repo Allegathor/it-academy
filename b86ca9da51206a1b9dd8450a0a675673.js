@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({70:[function(require,module,exports) {
+})({43:[function(require,module,exports) {
 var ready = function ready(evt) {
 	var gallery = document.getElementById('gallery');
 	gallery.style.position = 'relative';
@@ -133,4 +133,4 @@ var ready = function ready(evt) {
 };
 
 window.addEventListener('load', ready);
-},{}]},{},[70])
+},{}]},{},[43])
