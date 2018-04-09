@@ -240,7 +240,7 @@ var submitHandler = function(evt) {
 
 	formElements.forEach(function(el, i) {
 
-		tagName = el.tagName;
+		var tagName = el.tagName;
 
 		if(tagName === 'TEXTAREA') {
 			isValid = checkInputValidity(el, 'text');
