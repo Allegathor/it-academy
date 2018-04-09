@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({57:[function(require,module,exports) {
+})({29:[function(require,module,exports) {
 var testStr = 'abcdef';
 
 var reverseString = function reverseString(str) {
@@ -82,4 +82,4 @@ var reverseString = function reverseString(str) {
 };
 
 console.log(reverseString(testStr));
-},{}]},{},[57])
+},{}]},{},[29])

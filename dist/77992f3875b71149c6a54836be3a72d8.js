@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({67:[function(require,module,exports) {
+})({27:[function(require,module,exports) {
 var form = document.getElementById('sites-form');
 form.position = 'relative';
 form.noValidate = true;
@@ -285,7 +285,7 @@ var submitHandler = function submitHandler(evt) {
 
 	formElements.forEach(function (el, i) {
 
-		tagName = el.tagName;
+		var tagName = el.tagName;
 
 		if (tagName === 'TEXTAREA') {
 			isValid = checkInputValidity(el, 'text');
@@ -312,4 +312,4 @@ paymentRadioBtns.forEach(function (btn, i) {
 });
 
 submitBtn.addEventListener('click', submitHandler);
-},{}]},{},[67])
+},{}]},{},[27])
