@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({32:[function(require,module,exports) {
+})({61:[function(require,module,exports) {
 function selectNumFrom(n, m) {
 	return Math.floor(Math.random() * (m - n + 1)) + n;
 }
@@ -97,4 +97,4 @@ function showRandomColors(colorsCount) {
 }
 
 showRandomColors(5);
-},{}]},{},[32])
+},{}]},{},[61])

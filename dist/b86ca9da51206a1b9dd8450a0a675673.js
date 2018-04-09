@@ -71,92 +71,66 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({52:[function(require,module,exports) {
-var btn = document.getElementById('count-btn');
-var input = document.getElementById('text-area');
+})({70:[function(require,module,exports) {
+var ready = function ready(evt) {
+	var gallery = document.getElementById('gallery');
+	gallery.style.position = 'relative';
 
-var countVowels = function countVowels(string) {
-	string = string.toLowerCase();
-	var vowels = {
-		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
-		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
-		'я': 0, 'ы': 0
-	};
+	var imgCollection = gallery.querySelectorAll('.gallery-image');
 
-	var char;
-	var count = 0;
+	for (var i = imgCollection.length - 1; i >= 0; i--) {
+		var img = imgCollection[i];
 
-	for (var i = 0; i < string.length; i++) {
-		char = string[i];
-		if (char in vowels) {
-			count++;
-		}
+		var leftPos = img.offsetLeft + 'px';
+		var topPos = img.offsetTop + 'px';
+
+		img.dataset.draggable = false;
+		img.style.position = 'absolute';
+		img.style.left = leftPos;
+		img.style.top = topPos;
+		img.style.cursor = 'default';
 	}
 
-	return count;
-};
-
-var countVowelsFE = function countVowelsFE(string) {
-	string = string.toLowerCase();
-	var vowels = {
-		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
-		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
-		'я': 0, 'ы': 0
+	var dragHandler = function dragHandler(evt) {
+		evt.preventDefault();
 	};
 
-	var count = 0;
-	var countVow = function countVow(ch, i) {
-		if (ch in vowels) {
-			count++;
-		}
-	};
-	string.split('').forEach(countVow);
+	var deltaX = 0;
+	var deltaY = 0;
 
-	return count;
-};
-
-var countVowelsFilter = function countVowelsFilter(string) {
-	string = string.toLowerCase();
-	var vowels = {
-		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
-		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
-		'я': 0, 'ы': 0
+	var mouseMoveHandler = function mouseMoveHandler(evt) {
+		var el = gallery.querySelector('[data-draggable=true]');
+		el.style.left = evt.pageX - deltaX + 'px';
+		el.style.top = evt.pageY - deltaY + 'px';
 	};
 
-	var filterByType = function filterByType(ch, i) {
-		if (ch in vowels) {
-			return true;
+	var mouseDownHandler = function mouseDownHandler(evt) {
+		if (evt.target.tagName === 'IMG') {
+			evt.target.dataset.draggable = true;
+			evt.target.style.cursor = 'move';
+			evt.target.style.zIndex = '10';
+
+			deltaX = evt.pageX - evt.target.offsetLeft;
+			deltaY = evt.pageY - evt.target.offsetTop;
+
+			document.body.addEventListener('mousemove', mouseMoveHandler);
 		}
 	};
 
-	return string.split('').filter(filterByType).length;
-};
+	var mouseUpHandler = function mouseUpHandler(evt) {
+		evt.target.dataset.draggable = false;
+		evt.target.style.zIndex = '0';
+		evt.target.style.cursor = 'default';
 
-var countVowelsReduce = function countVowelsReduce(string) {
-	string = string.toLowerCase();
-	var vowels = {
-		'а': 0, 'е': 0, 'ё': 0, 'и': 0,
-		'о': 0, 'у': 0, 'э': 0, 'ю': 0,
-		'я': 0, 'ы': 0
+		gallery.removeChild(evt.target);
+		gallery.appendChild(evt.target);
+		document.body.removeEventListener('mousemove', mouseMoveHandler);
 	};
 
-	var reduceToVowCount = function reduceToVowCount(acc, ch) {
-		if (ch in vowels) {
-			return ++acc;
-		}
-
-		return acc;
-	};
-
-	return string.split('').reduce(reduceToVowCount, 0);
+	gallery.addEventListener('mouseup', mouseUpHandler);
+	gallery.addEventListener('mousedown', mouseDownHandler);
+	gallery.addEventListener('dragstart', dragHandler);
 };
 
-var btnHandler = function btnHandler() {
-	console.log(countVowels(input.value));
-	console.log('forEach: ' + countVowelsFE(input.value));
-	console.log('filter: ' + countVowelsFilter(input.value));
-	console.log('reduce: ' + countVowelsReduce(input.value));
-};
-
-btn.addEventListener('click', btnHandler);
-},{}]},{},[52])
+window.addEventListener('load', ready);
+},{}]},{},[70])
