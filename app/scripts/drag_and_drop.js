@@ -1,20 +1,28 @@
+var getCoords = function(el) {
+	var bcr = el.getBoundingClientRect();
+	return {
+		left: bcr.left + window.pageXOffset,
+		top: bcr.top + window.pageYOffset
+	}
+}
+
 var ready = function(evt) {
 	var gallery = document.getElementById('gallery');
-	gallery.style.position = 'relative';
-
-	var imgCollection = gallery.querySelectorAll('.gallery-image')
+	var imgCollection = gallery.querySelectorAll('.gallery-image');
 
 	for(var i = imgCollection.length - 1; i >= 0; i--) {
 		var img = imgCollection[i];
 
-		var leftPos = img.offsetLeft + 'px';
-		var topPos = img.offsetTop + 'px';
+		var imgCoords = getCoords(img);
+		var leftPos = imgCoords.left + 'px';
+		var topPos = imgCoords.top + 'px';
 
 		img.dataset.draggable = false;
 		img.style.position = 'absolute';
 		img.style.left = leftPos;
 		img.style.top = topPos;
 		img.style.cursor = 'default';
+		img.style.margin = '0';
 	}
 
 	var dragHandler = function(evt) {
@@ -35,9 +43,10 @@ var ready = function(evt) {
 			evt.target.dataset.draggable = true;
 			evt.target.style.cursor = 'move';
 			evt.target.style.zIndex = '10';
+			var elCoords = getCoords(evt.target);
 
-			deltaX = evt.pageX - evt.target.offsetLeft;
-			deltaY = evt.pageY - evt.target.offsetTop;
+			deltaX = evt.pageX - elCoords.left;
+			deltaY = evt.pageY - elCoords.top;
 
 			document.body.addEventListener('mousemove', mouseMoveHandler);
 		}
