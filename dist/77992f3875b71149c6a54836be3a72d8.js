@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({27:[function(require,module,exports) {
+})({32:[function(require,module,exports) {
 var form = document.getElementById('sites-form');
 form.position = 'relative';
 form.noValidate = true;
@@ -312,4 +312,4 @@ paymentRadioBtns.forEach(function (btn, i) {
 });
 
 submitBtn.addEventListener('click', submitHandler);
-},{}]},{},[27])
+},{}]},{},[32])

@@ -71,7 +71,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({33:[function(require,module,exports) {
+})({27:[function(require,module,exports) {
 var btn = document.getElementById('count-btn');
 var input = document.getElementById('text-area');
 
@@ -159,4 +159,4 @@ var btnHandler = function btnHandler() {
 };
 
 btn.addEventListener('click', btnHandler);
-},{}]},{},[33])
+},{}]},{},[27])
